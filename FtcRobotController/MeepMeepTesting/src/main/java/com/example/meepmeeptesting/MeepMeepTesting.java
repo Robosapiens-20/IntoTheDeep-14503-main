@@ -21,7 +21,7 @@ public class MeepMeepTesting {
                 .turn(Math.toRadians(90))
                 .lineToX(0)
                 .turn(Math.toRadians(90))
-                .lineToY(0)
+                .lineToY(10)
                 .turn(Math.toRadians(90))
                 .build());
 
