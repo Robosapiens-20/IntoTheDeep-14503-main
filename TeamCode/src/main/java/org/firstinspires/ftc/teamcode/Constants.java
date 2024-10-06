@@ -5,34 +5,58 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import com.qualcomm.robotcore.hardware.CRServo;
+
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+
+import com.qualcomm.robotcore.hardware.ColorSensor;
+
 public class Constants{
 
-    public DcMotor intake;
+    public static DcMotor intake;
 
-    public DcMotor lf;
+    public static DcMotor lf;
 
-    public DcMotor lb;
+    public static DcMotor lb;
 
-    public DcMotor rf;
+    public static DcMotor rf;
 
-    public DcMotor rb;
+    public static DcMotor rb;
 
-    public DcMotor hang;
+    public static DcMotor hang;
 
-    public DcMotor ls;
+    public static DcMotor ls;
 
-    public DcMotor rs;
+    public static DcMotor rs;
 
-    public Servo extendo;
+    public static Servo extendo;
 
-    public Servo claw;
+    public static Servo claw;
 
-    public Servo clawWrist;
+    public static Servo clawWrist;
 
-    public Servo unnamed1;
+    public static Servo unnamed1;
 
-    public Servo unnamed2;
+    public static Servo unnamed2;
+    public static void initHardware(HardwareMap hardwareMap){
+        lf = hardwareMap.dcMotor.get("lf");
+
+        lb = hardwareMap.dcMotor.get("lb");
+
+        rf = hardwareMap.dcMotor.get("rf");
+
+        rb = hardwareMap.dcMotor.get("rb");
+
+        intake = hardwareMap.dcMotor.get("intake");
+
+        ls = hardwareMap.dcMotor.get("ls");
+
+        rs = hardwareMap.dcMotor.get("rs");
 
 
+
+    }
 
 }
+
