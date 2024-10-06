@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+/*package org.firstinspires.ftc.teamcode;
 
 
 import com.acmerobotics.roadrunner.Action;
@@ -49,3 +49,4 @@ public class AutoRedClip extends LinearOpMode {
     }
 
 }
+*/
