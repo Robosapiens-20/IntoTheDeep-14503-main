@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Constants;
 
-@TeleOp(name = "IntakeTest")
+@TeleOp(name = "FirstTeleOp")
 public class TeleOpMain extends LinearOpMode {
     DcMotor lf = null;
     DcMotor lb = null;
