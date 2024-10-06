@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -20,10 +20,14 @@ public class TeleOpMain extends LinearOpMode {
     DcMotor rs = null;
 
     DcMotor intake = null;
+
+    DcMotor winch = null;
+
     @Override
     public void runOpMode() throws InterruptedException {
 
         Constants.initHardware(hardwareMap);
+        winch = Constants.winch;
         lf = Constants.lf;
         lb = Constants.lb;
         rb = Constants.rb;
@@ -33,7 +37,7 @@ public class TeleOpMain extends LinearOpMode {
         ls = Constants.ls;
         waitForStart();
         while(opModeIsActive()){
-            double y = gamepad1.left_stick_y;
+            double y = -gamepad1.left_stick_y;
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = gamepad1.right_stick_x;
 

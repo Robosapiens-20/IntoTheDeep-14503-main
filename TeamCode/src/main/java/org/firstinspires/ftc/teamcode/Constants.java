@@ -30,6 +30,8 @@ public class Constants{
 
     public static DcMotor rs;
 
+    public static DcMotor winch;
+
     public static Servo extendo;
 
     public static Servo claw;
@@ -54,6 +56,7 @@ public class Constants{
 
         rs = hardwareMap.dcMotor.get("rs");
 
+        winch = hardwareMap.dcMotor.get("winch");
 
 
     }
