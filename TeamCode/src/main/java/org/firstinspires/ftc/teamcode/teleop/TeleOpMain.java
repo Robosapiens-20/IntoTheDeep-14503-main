@@ -8,19 +8,12 @@ import org.firstinspires.ftc.teamcode.Constants;
 @TeleOp(name = "IntakeTest")
 public class TeleOpMain extends LinearOpMode {
     DcMotor lf = null;
-
     DcMotor lb = null;
-
     DcMotor rb = null;
-
     DcMotor rf = null;
-
     DcMotor ls =null;
-
     DcMotor rs = null;
-
     DcMotor intake = null;
-
     DcMotor winch = null;
 
     @Override
@@ -57,8 +50,6 @@ public class TeleOpMain extends LinearOpMode {
             intake.setPower(gamepad2.right_stick_x);
             ls.setPower(-gamepad2.left_stick_y);
             rs.setPower(gamepad2.left_stick_y);
-
-
         }
     }
 }
