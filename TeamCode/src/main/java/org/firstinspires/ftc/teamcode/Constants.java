@@ -36,7 +36,7 @@ public class Constants{
 
     public static Servo claw;
 
-    public static Servo clawWrist;
+    public static CRServo clawWrist;
 
     public static Servo linkage1;
 
@@ -62,7 +62,7 @@ public class Constants{
 
         linkage2 = hardwareMap.servo.get("linkage2");
 
-        clawWrist = hardwareMap.servo.get("clawWrist");
+        clawWrist = hardwareMap.crservo.get("clawWrist");
     }
 
 }

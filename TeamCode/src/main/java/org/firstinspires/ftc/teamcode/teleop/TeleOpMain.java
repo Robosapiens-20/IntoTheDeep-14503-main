@@ -18,6 +18,7 @@ public class TeleOpMain extends LinearOpMode {
     DcMotor intake = null;
     DcMotor winch = null;
     Servo claw = null;
+    CRServo clawWrist = null;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -28,6 +29,7 @@ public class TeleOpMain extends LinearOpMode {
         lb = Constants.lb;
         rb = Constants.rb;
         rf= Constants.rf;
+        clawWrist=Constants.clawWrist;
         intake = Constants.intake;
         rs = Constants.rs;
         ls = Constants.ls;
@@ -51,15 +53,15 @@ public class TeleOpMain extends LinearOpMode {
             lb.setPower(backLeftPower);
             rf.setPower(frontRightPower);
             rb.setPower(backRightPower);
-            intake.setPower(gamepad2.right_stick_x);
+            intake.setPower(gamepad2.right_stick_y);
             ls.setPower(-gamepad2.left_stick_y);
             rs.setPower(gamepad2.left_stick_y);
-            winch.setPower(gamepad2.right_stick_y);
+            clawWrist.setPower(-gamepad2.right_stick_x);
             if(gamepad2.LeftTrigger > 0.3)
                 claw.setPosition(0);
             if(gamepad2.RightTrigger > 0.3)
                 claw.setPosition(1);
-            
+
         }
     }
 }
