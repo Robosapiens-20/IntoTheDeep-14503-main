@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Constants;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
+
 
 
 @TeleOp(name = "FirstTeleOp")
@@ -13,7 +15,7 @@ public class TeleOpMain extends LinearOpMode {
     DcMotor lb = null;
     DcMotor rb = null;
     DcMotor rf = null;
-    DcMotor ls =null;
+    DcMotor ls = null;
     DcMotor rs = null;
     DcMotor intake = null;
     DcMotor winch = null;
@@ -28,8 +30,8 @@ public class TeleOpMain extends LinearOpMode {
         lf = Constants.lf;
         lb = Constants.lb;
         rb = Constants.rb;
-        rf= Constants.rf;
-        clawWrist=Constants.clawWrist;
+        rf = Constants.rf;
+        clawWrist = Constants.clawWrist;
         intake = Constants.intake;
         rs = Constants.rs;
         ls = Constants.ls;
@@ -57,11 +59,10 @@ public class TeleOpMain extends LinearOpMode {
             ls.setPower(-gamepad2.left_stick_y);
             rs.setPower(gamepad2.left_stick_y);
             clawWrist.setPower(-gamepad2.right_stick_x);
-            if(gamepad2.LeftTrigger > 0.3)
-                claw.setPosition(0);
-            if(gamepad2.RightTrigger > 0.3)
-                claw.setPosition(1);
-
+            //if(gamepad2.leftTrigger > 0.3)
+              //  claw.setPosition(0);
+            //if(gamepad2.rightTrigger > 0.3)
+              //  claw.setPosition(1);
         }
     }
 }
