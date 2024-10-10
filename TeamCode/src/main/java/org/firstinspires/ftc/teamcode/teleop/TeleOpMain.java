@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Constants;
+import com.qualcomm.robotcore.hardware.Servo;
+
 
 @TeleOp(name = "FirstTeleOp")
 public class TeleOpMain extends LinearOpMode {
@@ -15,6 +17,7 @@ public class TeleOpMain extends LinearOpMode {
     DcMotor rs = null;
     DcMotor intake = null;
     DcMotor winch = null;
+    Servo claw = null;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -28,6 +31,7 @@ public class TeleOpMain extends LinearOpMode {
         intake = Constants.intake;
         rs = Constants.rs;
         ls = Constants.ls;
+        claw = Constants.claw;
         waitForStart();
         while(opModeIsActive()){
             double y = -gamepad1.left_stick_y;
@@ -50,6 +54,12 @@ public class TeleOpMain extends LinearOpMode {
             intake.setPower(gamepad2.right_stick_x);
             ls.setPower(-gamepad2.left_stick_y);
             rs.setPower(gamepad2.left_stick_y);
+            winch.setPower(gamepad2.right_stick_y);
+            if(gamepad2.LeftTrigger > 0.3)
+                claw.setPosition(0);
+            if(gamepad2.RightTrigger > 0.3)
+                claw.setPosition(1);
+            
         }
     }
 }

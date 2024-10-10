@@ -38,9 +38,9 @@ public class Constants{
 
     public static Servo clawWrist;
 
-    public static Servo unnamed1;
+    public static Servo linkage1;
 
-    public static Servo unnamed2;
+    public static Servo linkage2;
     public static void initHardware(HardwareMap hardwareMap){
         lf = hardwareMap.dcMotor.get("lf");
 
@@ -58,7 +58,11 @@ public class Constants{
 
         winch = hardwareMap.dcMotor.get("winch");
 
+        linkage1 = hardwareMap.servo.get("linkage1");
 
+        linkage2 = hardwareMap.servo.get("linkage2");
+
+        clawWrist = hardwareMap.servo.get("clawWrist");
     }
 
 }
