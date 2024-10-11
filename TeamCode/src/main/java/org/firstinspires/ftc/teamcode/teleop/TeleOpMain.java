@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Constants;
+
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 
@@ -20,9 +22,15 @@ public class TeleOpMain extends LinearOpMode {
     Servo claw = null;
     CRServo clawWrist = null;
 
+    Gamepad g1 = gamepad1;
+    Gamepad g2 = gamepad2;
     @Override
     public void runOpMode() throws InterruptedException {
+        g1 = gamepad1;
+        g2 = gamepad2;
 
+        g1.type = Gamepad.Type.SONY_PS4;
+        g2.type = Gamepad.Type.SONY_PS4;
         Constants.initHardware(hardwareMap);
         winch = Constants.winch;
         lf = Constants.lf;
@@ -36,9 +44,9 @@ public class TeleOpMain extends LinearOpMode {
         claw = Constants.claw;
         waitForStart();
         while(opModeIsActive()){
-            double y = -gamepad1.left_stick_y;
-            double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
-            double rx = gamepad1.right_stick_x;
+            double y = -g1.left_stick_y;
+            double x = g1.left_stick_x * 1.1; // Counteract imperfect strafing
+            double rx = g1.right_stick_x;
 
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio,
@@ -53,14 +61,14 @@ public class TeleOpMain extends LinearOpMode {
             lb.setPower(backLeftPower);
             rf.setPower(frontRightPower);
             rb.setPower(backRightPower);
-            intake.setPower(gamepad2.right_stick_y);
-            ls.setPower(-gamepad2.left_stick_y);
-            rs.setPower(gamepad2.left_stick_y);
-            clawWrist.setPower(-gamepad2.right_stick_x);
-            //if(gamepad2.leftTrigger > 0.3)
-              //  claw.setPosition(0);
-            //if(gamepad2.rightTrigger > 0.3)
-              //  claw.setPosition(1);
+            intake.setPower(g2.right_stick_y);
+            ls.setPower(-g2.left_stick_y);
+            rs.setPower(g2.left_stick_y);
+            clawWrist.setPower(-g2.right_stick_x);
+            if(gamepad2.left_trigger > 0.3)
+                claw.setPosition(0);
+            if(gamepad2.right_trigger > 0.3)
+                claw.setPosition(1);
         }
     }
 }

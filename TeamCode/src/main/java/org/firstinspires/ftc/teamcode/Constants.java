@@ -32,7 +32,7 @@ public class Constants{
 
     public static DcMotor winch;
 
-    public static Servo extendo;
+    //public static Servo extendo;
 
     public static Servo claw;
 
