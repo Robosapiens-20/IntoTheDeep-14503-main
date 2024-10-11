@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auton;
+/*package org.firstinspires.ftc.teamcode.auton;
 
 import androidx.annotation.NonNull;
 
@@ -70,3 +70,4 @@ public class AutoBlueBucket extends LinearOpMode {
     }
 
 }
+*/
