@@ -7,8 +7,6 @@ import org.firstinspires.ftc.teamcode.Constants;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 
-
-
 @TeleOp(name = "FirstTeleOp")
 public class TeleOpMain extends LinearOpMode {
     DcMotor lf = null;
