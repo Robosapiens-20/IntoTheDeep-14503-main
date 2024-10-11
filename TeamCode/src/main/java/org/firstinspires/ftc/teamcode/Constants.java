@@ -24,8 +24,6 @@ public class Constants{
 
     public static DcMotor rb;
 
-    public static DcMotor hang;
-
     public static DcMotor ls;
 
     public static DcMotor rs;
@@ -40,9 +38,11 @@ public class Constants{
 
     public static Servo linkage2;
 
-    public static Servo intakeWrist1;
+    public static Servo intakeDrop1;
 
-    public static Servo intakeWrist2;
+    public static Servo intakeDrop2;
+
+    public static Servo intakeWrist;
 
     public static Servo outtakeArmL;
 
@@ -75,9 +75,11 @@ public class Constants{
 
         clawArm = hardwareMap.servo.get("clawArm");
 
-        intakeWrist1 = hardwareMap.servo.get("intakeWrist1");
+        intakeWrist = hardwareMap.servo.get("intakeWrist");
 
-        intakeWrist2 = hardwareMap.servo.get("intakeWrist2");
+        intakeDrop1 = hardwareMap.servo.get("intakeDrop1");
+
+        intakeDrop2 = hardwareMap.servo.get("intakeDrop2");
 
         outtakeArmL = hardwareMap.servo.get("outtakeArmL");
 
