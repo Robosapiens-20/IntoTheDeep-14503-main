@@ -21,7 +21,6 @@ public class TeleOpMain extends LinearOpMode {
     DcMotor winch = null;
     Servo claw = null;
     CRServo clawWrist = null;
-
     Gamepad g1 = gamepad1;
     Gamepad g2 = gamepad2;
     @Override
@@ -61,14 +60,15 @@ public class TeleOpMain extends LinearOpMode {
             lb.setPower(backLeftPower);
             rf.setPower(frontRightPower);
             rb.setPower(backRightPower);
-            intake.setPower(g2.right_stick_y);
+            intake.setPower(g2.right_trigger);
             ls.setPower(-g2.left_stick_y);
             rs.setPower(g2.left_stick_y);
             clawWrist.setPower(-g2.right_stick_x);
-            if(gamepad2.left_trigger > 0.3)
+            if(g2.left_bumper)
                 claw.setPosition(0);
-            if(gamepad2.right_trigger > 0.3)
+            if(g2.right_bumper)
                 claw.setPosition(1);
+
         }
     }
 }
