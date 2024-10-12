@@ -13,16 +13,16 @@ import com.qualcomm.robotcore.hardware.CRServo;
 
 @TeleOp(name = "FirstTeleOp")
 public class TeleOpMain extends LinearOpMode {
-    DcMotor lf = null;
-    DcMotor lb = null;
-    DcMotor rb = null;
-    DcMotor rf = null;
-    DcMotor ls = null;
-    DcMotor rs = null;
-    DcMotor intake = null;
-    DcMotor winch = null;
-    Servo claw = null;
-    Servo clawWrist = null;
+    DcMotor lf;
+    DcMotor lb;
+    DcMotor rb;
+    DcMotor rf;
+    DcMotor ls;
+    DcMotor rs;
+    DcMotor intake;
+    DcMotor winch;
+    Servo claw;
+    Servo clawWrist;
     Servo linkage1;
     Servo linkage2;
     Servo intakeDrop1;
@@ -113,8 +113,6 @@ public class TeleOpMain extends LinearOpMode {
                 claw.setPosition(0);
             if(g2.right_bumper)
                 claw.setPosition(1);
-
-
         }
     }
 }
