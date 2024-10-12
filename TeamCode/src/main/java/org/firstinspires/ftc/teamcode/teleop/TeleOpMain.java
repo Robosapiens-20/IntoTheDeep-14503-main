@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 
-@TeleOp(name = "FirstTeleOp")
+@TeleOp(name = "YAY-TELEOP!!!!!")
 public class TeleOpMain extends LinearOpMode {
     DcMotor lf;
     DcMotor lb;
@@ -78,7 +78,8 @@ public class TeleOpMain extends LinearOpMode {
             lb.setPower(backLeftPower);
             rf.setPower(frontRightPower);
             rb.setPower(backRightPower);
-            intake.setPower(g2.right_trigger);
+            intake.setPower(g1.right_trigger);
+            intake.setPower(-g1.left_trigger);
             ls.setPower(-g2.left_stick_y);
             rs.setPower(g2.left_stick_y);
             if(g2.circle)
@@ -113,6 +114,11 @@ public class TeleOpMain extends LinearOpMode {
                 claw.setPosition(0);
             if(g2.right_bumper)
                 claw.setPosition(1);
+            if(g2.right_trigger >0.2){
+                intakeWrist.setPosition(1);
+            }
+            if(g2.left_trigger > 0)
+                intakeWrist.setPosition(0);
+            }
         }
     }
-}
