@@ -24,23 +24,32 @@ public class Constants{
 
     public static DcMotor rb;
 
-    public static DcMotor hang;
-
     public static DcMotor ls;
 
     public static DcMotor rs;
 
     public static DcMotor winch;
 
-    public static Servo extendo;
-
     public static Servo claw;
 
-    public static CRServo clawWrist;
+    public static Servo clawWrist;
 
     public static Servo linkage1;
 
     public static Servo linkage2;
+
+    public static Servo intakeDrop1;
+
+    public static Servo intakeDrop2;
+
+    public static Servo intakeWrist;
+
+    public static Servo outtakeArmL;
+
+    public static Servo outtakeArmR;
+
+    public static Servo clawArm;
+
     public static void initHardware(HardwareMap hardwareMap){
         lf = hardwareMap.dcMotor.get("lf");
 
@@ -62,7 +71,19 @@ public class Constants{
 
         linkage2 = hardwareMap.servo.get("linkage2");
 
-        clawWrist = hardwareMap.crservo.get("clawWrist");
+        clawWrist = hardwareMap.servo.get("clawWrist");
+
+        clawArm = hardwareMap.servo.get("clawArm");
+
+        intakeWrist = hardwareMap.servo.get("intakeWrist");
+
+        intakeDrop1 = hardwareMap.servo.get("intakeDrop1");
+
+        intakeDrop2 = hardwareMap.servo.get("intakeDrop2");
+
+        outtakeArmL = hardwareMap.servo.get("outtakeArmL");
+
+        outtakeArmR = hardwareMap.servo.get("outtakeArmR");
     }
 
 }
