@@ -41,22 +41,22 @@ public class AutoBlueBucket extends LinearOpMode {
 // actionBuilder builds from the drive steps passed to it
         TrajectoryActionBuilder tab1 = drive.actionBuilder(initialPose)
                 .setTangent(-10)
-                .splineToLinearHeading(new Pose2d(0, 38, Math.toRadians(90)), Math.PI / 2)
-                .lineToY(29)
-                .lineToY(38)
-                .setTangent(-30)
-                .splineToLinearHeading(new Pose2d(48,36,Math.toRadians(-90)),4)
-                .setTangent(-10)
-                .splineToLinearHeading(new Pose2d(56,56,Math.toRadians(-130)),Math.PI)
-                .setTangent(-30)
-                .splineToLinearHeading(new Pose2d(58,36,Math.toRadians(-90)),4)
-                .setTangent(-10)
-                .splineToLinearHeading(new Pose2d(56,56,Math.toRadians(-130)),Math.PI)
-                .setTangent(30)
-                .splineToLinearHeading(new Pose2d(70,36,Math.toRadians(-90)),0)
-                .setTangent(-10)
-                .splineToLinearHeading(new Pose2d(56,56,Math.toRadians(-130)),Math.PI)
-                .lineToX(66);
+                .splineToSplineHeading(new Pose2d(0, 40, Math.toRadians(90)), Math.PI / 2)
+                .lineToY(34)
+                .setTangent(0)
+                .splineToSplineHeading(new Pose2d(48,42,Math.toRadians(-90)),0)
+                .waitSeconds(1)
+                //extend intake and intake first block 100%
+                .splineToSplineHeading(new Pose2d(56,56,Math.toRadians(-135)), 0)
+                //deposit first block
+                .turnTo(Math.toRadians(-87))
+                .waitSeconds(1)
+                .turnTo(Math.toRadians(-135))
+                //get the second block easy points
+                .waitSeconds(1)
+                .turnTo(Math.toRadians(295))
+                .waitSeconds(1)
+                .turnTo(Math.toRadians(-135));
 
         waitForStart();
         if (isStopRequested()) return;
