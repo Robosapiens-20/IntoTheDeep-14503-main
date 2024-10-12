@@ -1,20 +1,18 @@
-package com.example.meepmeeptesting;
+/*package org.firstinspires.ftc.teamcode.auton;
 
+import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.noahbres.meepmeep.MeepMeep;
-import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
-import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
+import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.ftc.Actions;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-public class MeepMeepTesting {
-    public static void main(String[] args) {
-        MeepMeep meepMeep = new MeepMeep(800);
+public class RedBucket extends LinearOpMode{
+    @Override
+    public void runOpMode() throws InterruptedException{
+        MecanumDrive drive;
+        drive = new MecanumDrive(hardwareMap, new Pose2d(-35, -70, Math.toRadians(90)));
 
-        RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
-                // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
-                .build();
-
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-35, -70, Math.toRadians(90)))
+        TrajectoryActionBuilder tab1 = drive.actionBuilder(IntialPose)
                 .setTangent(-10)
                 .splineToSplineHeading(new Pose2d(0, -34, Math.toRadians(-90)), Math.PI / 2)
                 .lineToY(-34)
@@ -34,11 +32,17 @@ public class MeepMeepTesting {
                 //extend and intake the last block
                 .turnTo(Math.toRadians(49))
                 //deposit last block free ahh auto
-                .build());
-        meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
-                .setDarkMode(true)
-                .setBackgroundAlpha(0.95f)
-                .addEntity(myBot)
-                .start();
+
+        waitForStart();
+
+        if (isStopRequested()) return;
+        Action trajectoryActionChosen;
+        trajectoryActionChosen = tab1.build();
+        Actions.runBlocking(
+                new SequentialAction(
+                        trajectoryActionChosen,
+                        )
+        );
     }
 }
+*/
