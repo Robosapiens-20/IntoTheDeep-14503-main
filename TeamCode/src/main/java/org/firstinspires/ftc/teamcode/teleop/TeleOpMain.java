@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -33,6 +34,7 @@ public class TeleOpMain extends LinearOpMode {
 
     Gamepad g1 = gamepad1;
     Gamepad g2 = gamepad2;
+    Limelight3A limelight;
     @Override
     public void runOpMode() throws InterruptedException {
         g1 = gamepad1;
@@ -41,6 +43,7 @@ public class TeleOpMain extends LinearOpMode {
         g1.type = Gamepad.Type.SONY_PS4;
         g2.type = Gamepad.Type.SONY_PS4;
         Constants.initHardware(hardwareMap);
+        limelight = Constants.limelight;
         winch = Constants.winch;
         lf = Constants.lf;
         lb = Constants.lb;
@@ -86,23 +89,23 @@ public class TeleOpMain extends LinearOpMode {
                 clawWrist.setPosition(1);
             if(g2.square)
                 clawWrist.setPosition(0);
-            if(g2.share){
+            if(g2.triangle){
                 outtakeArmL.setPosition(1);
                 outtakeArmR.setPosition(1);
             }
-            if(g2.options) {
+            if(g2.cross) {
                 outtakeArmL.setPosition(0);
                 outtakeArmR.setPosition(0);
             }
-            if(g2.dpad_right){
+            if(g2.dpad_up){
                 linkage2.setPosition(1);
                 linkage1.setPosition(1);
             }
-            if(g2.dpad_left){
+            if(g2.dpad_down){
                 linkage1.setPosition(0);
                 linkage2.setPosition(0);
             }
-            if(g2.dpad_up){
+            if(g1.dpad_up){
                 intakeDrop1.setPosition(1);
                 intakeDrop2.setPosition(1);
             }

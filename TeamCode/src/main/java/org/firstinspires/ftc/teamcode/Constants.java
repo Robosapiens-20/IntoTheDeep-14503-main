@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.hardware.Servo;
@@ -50,6 +51,8 @@ public class Constants{
 
     public static Servo clawArm;
 
+    public static Limelight3A limelight;
+
     public static void initHardware(HardwareMap hardwareMap){
         lf = hardwareMap.dcMotor.get("lf");
 
@@ -71,6 +74,8 @@ public class Constants{
 
         linkage2 = hardwareMap.servo.get("linkage2");
 
+        claw = hardwareMap.servo.get("claw");
+
         clawWrist = hardwareMap.servo.get("clawWrist");
 
         clawArm = hardwareMap.servo.get("clawArm");
@@ -84,6 +89,8 @@ public class Constants{
         outtakeArmL = hardwareMap.servo.get("outtakeArmL");
 
         outtakeArmR = hardwareMap.servo.get("outtakeArmR");
+
+        limelight = hardwareMap.get(Limelight3A.class, "limelight");
     }
 
 }
