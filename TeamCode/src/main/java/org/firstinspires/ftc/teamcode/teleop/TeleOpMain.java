@@ -85,31 +85,34 @@ public class TeleOpMain extends LinearOpMode {
             intake.setPower(-g1.left_trigger);
             ls.setPower(-g2.left_stick_y);
             rs.setPower(g2.left_stick_y);
+            int i = 0;
             if(g2.circle)
                 clawWrist.setPosition(1);
             if(g2.square)
                 clawWrist.setPosition(0);
-            if(g2.triangle){
+            if(g2.cross && i==1){
                 outtakeArmL.setPosition(1);
                 outtakeArmR.setPosition(1);
+                i=0;
             }
-            if(g2.cross) {
+            if(g2.cross && i==0) {
                 outtakeArmL.setPosition(0);
                 outtakeArmR.setPosition(0);
+                i=1;
             }
-            if(g2.dpad_up){
+            if(g1.dpad_up){
                 linkage2.setPosition(1);
                 linkage1.setPosition(1);
             }
-            if(g2.dpad_down){
+            if(g1.dpad_down){
                 linkage1.setPosition(0);
                 linkage2.setPosition(0);
             }
-            if(g1.dpad_up){
+            if(g1.triangle){
                 intakeDrop1.setPosition(1);
                 intakeDrop2.setPosition(1);
             }
-            if(g1.dpad_down){
+            if(g1.cross){
                 intakeDrop1.setPosition(0);
                 intakeDrop2.setPosition(0);
             }
@@ -117,11 +120,13 @@ public class TeleOpMain extends LinearOpMode {
                 claw.setPosition(0);
             if(g2.right_bumper)
                 claw.setPosition(1);
-            if(g2.right_trigger >0.2){
+
+            //intakeWrist possible changes according to Neelan
+            if(g1.right_stick_y > 0.2){
                 intakeWrist.setPosition(1);
             }
-            if(g2.left_trigger > 0)
+            if(g1.right_stick_y < 0)
                 intakeWrist.setPosition(0);
             }
-        }
+              }
     }
