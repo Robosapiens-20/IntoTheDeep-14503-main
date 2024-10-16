@@ -77,7 +77,7 @@ public class Constants{
         clawWrist = hardwareMap.servo.get("clawWrist");
 
         clawArm = hardwareMap.servo.get("clawArm");
-
+        
         intakeDrop1 = hardwareMap.servo.get("intakeDrop1");
 
         intakeDrop2 = hardwareMap.servo.get("intakeDrop2");
