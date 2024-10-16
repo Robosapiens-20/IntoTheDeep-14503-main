@@ -14,27 +14,27 @@ import com.qualcomm.robotcore.hardware.CRServo;
 
 @TeleOp(name = "YAY-TELEOP!!!!!")
 public class TeleOpMain extends LinearOpMode {
-    DcMotor lf;
-    DcMotor lb;
-    DcMotor rb;
-    DcMotor rf;
-    DcMotor ls;
-    DcMotor rs;
-    DcMotor intake;
-    DcMotor winch;
-    Servo claw;
-    Servo clawWrist;
-    Servo linkage1;
-    Servo linkage2;
-    Servo intakeDrop1;
-    Servo intakeDrop2;
-    Servo intakeWrist;
-    Servo outtakeArmL;
-    Servo outtakeArmR;
+    DcMotor lf = null;
+    DcMotor lb = null;
+    DcMotor rb = null;
+    DcMotor rf = null;
+    DcMotor ls = null;
+    DcMotor rs = null;
+    DcMotor intake = null;
+    DcMotor winch = null;
+    Servo claw = null;
+    Servo clawWrist = null;
+    Servo linkage1 = null;
+    Servo linkage2 = null;
+    Servo intakeDrop1 = null;
+    Servo intakeDrop2 = null;
+    Servo outtakeArmL = null;
+    Servo outtakeArmR = null;
 
     Gamepad g1 = gamepad1;
     Gamepad g2 = gamepad2;
     Limelight3A limelight;
+
     @Override
     public void runOpMode() throws InterruptedException {
         g1 = gamepad1;
@@ -49,11 +49,10 @@ public class TeleOpMain extends LinearOpMode {
         lb = Constants.lb;
         rb = Constants.rb;
         rf = Constants.rf;
-        linkage1=Constants.linkage1;
+        linkage1 = Constants.linkage1;
         linkage2 = Constants.linkage2;
         intakeDrop1 = Constants.intakeDrop1;
         intakeDrop2 = Constants.intakeDrop2;
-        intakeWrist = Constants.intakeWrist;
         outtakeArmL = Constants.outtakeArmL;
         outtakeArmR = Constants.outtakeArmR;
         clawWrist = Constants.clawWrist;
@@ -63,7 +62,7 @@ public class TeleOpMain extends LinearOpMode {
         claw = Constants.claw;
 
         waitForStart();
-        while(opModeIsActive()){
+        while (opModeIsActive()) {
             double y = -g1.left_stick_y;
             double x = g1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = g1.right_stick_x;
@@ -86,47 +85,43 @@ public class TeleOpMain extends LinearOpMode {
             ls.setPower(-g2.left_stick_y);
             rs.setPower(g2.left_stick_y);
             int i = 0;
-            if(g2.circle)
+            if (g2.circle)
                 clawWrist.setPosition(1);
-            if(g2.square)
+            if (g2.square)
                 clawWrist.setPosition(0);
-            if(g2.cross && i==1){
+            if (g2.cross && i == 1) {
                 outtakeArmL.setPosition(1);
                 outtakeArmR.setPosition(1);
-                i=0;
+                i = 0;
             }
-            if(g2.cross && i==0) {
+            if (g2.cross && i == 0) {
                 outtakeArmL.setPosition(0);
                 outtakeArmR.setPosition(0);
-                i=1;
+                i = 1;
             }
-            if(g1.dpad_up){
+            if (g1.dpad_up) {
                 linkage2.setPosition(1);
                 linkage1.setPosition(1);
             }
-            if(g1.dpad_down){
+            if (g1.dpad_down) {
                 linkage1.setPosition(0);
                 linkage2.setPosition(0);
             }
-            if(g1.triangle){
+            if (g1.triangle) {
                 intakeDrop1.setPosition(1);
                 intakeDrop2.setPosition(1);
             }
-            if(g1.cross){
+            if (g1.cross) {
                 intakeDrop1.setPosition(0);
                 intakeDrop2.setPosition(0);
             }
-            if(g2.left_bumper)
+            if (g2.left_bumper)
                 claw.setPosition(0);
-            if(g2.right_bumper)
+            if (g2.right_bumper)
                 claw.setPosition(1);
 
-            //intakeWrist possible changes according to Neelan
-            if(g1.right_stick_y > 0.2){
-                intakeWrist.setPosition(1);
-            }
-            if(g1.right_stick_y < 0)
-                intakeWrist.setPosition(0);
-            }
-              }
+
+        }
+
     }
+}

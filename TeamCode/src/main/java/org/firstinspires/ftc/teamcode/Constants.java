@@ -15,43 +15,41 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 
 public class Constants{
 
-    public static DcMotor intake;
+    public static DcMotor intake = null;
 
-    public static DcMotor lf;
+    public static DcMotor lf = null;
 
-    public static DcMotor lb;
+    public static DcMotor lb = null;
 
-    public static DcMotor rf;
+    public static DcMotor rf = null;
 
-    public static DcMotor rb;
+    public static DcMotor rb = null;
 
-    public static DcMotor ls;
+    public static DcMotor ls = null;
 
-    public static DcMotor rs;
+    public static DcMotor rs = null;
 
-    public static DcMotor winch;
+    public static DcMotor winch = null;
 
-    public static Servo claw;
+    public static Servo claw = null;
 
-    public static Servo clawWrist;
+    public static Servo clawWrist = null;
 
-    public static Servo linkage1;
+    public static Servo linkage1 = null;
 
-    public static Servo linkage2;
+    public static Servo linkage2 = null;
 
-    public static Servo intakeDrop1;
+    public static Servo intakeDrop1 = null;
 
-    public static Servo intakeDrop2;
+    public static Servo intakeDrop2 = null;
 
-    public static Servo intakeWrist;
+    public static Servo outtakeArmL = null;
 
-    public static Servo outtakeArmL;
+    public static Servo outtakeArmR = null;
 
-    public static Servo outtakeArmR;
+    public static Servo clawArm = null;
 
-    public static Servo clawArm;
-
-    public static Limelight3A limelight;
+    public static Limelight3A limelight = null;
 
     public static void initHardware(HardwareMap hardwareMap){
         lf = hardwareMap.dcMotor.get("lf");
@@ -79,8 +77,6 @@ public class Constants{
         clawWrist = hardwareMap.servo.get("clawWrist");
 
         clawArm = hardwareMap.servo.get("clawArm");
-
-        intakeWrist = hardwareMap.servo.get("intakeWrist");
 
         intakeDrop1 = hardwareMap.servo.get("intakeDrop1");
 
