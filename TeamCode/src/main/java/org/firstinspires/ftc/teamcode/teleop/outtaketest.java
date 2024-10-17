@@ -39,16 +39,14 @@ public class outtaketest extends LinearOpMode {
         waitForStart();
         while(opModeIsActive()){
 
-
-            if(g1.cross)
-                outtakeArmL.setPosition(0.5);
-            if(g1.square)
-                outtakeArmL.setPosition(0.1);
             if(g1.circle)
                 outtakeArmR.setPosition(0.4);
+                claw.setPosition(0);
+                clawWrist.setPosition(0.5);
             if(g1.triangle)
                 outtakeArmR.setPosition(0.1);
-
+                claw.setPosition(0.7);
+                clawWrist.setPosition(0);
 
         }
     }
