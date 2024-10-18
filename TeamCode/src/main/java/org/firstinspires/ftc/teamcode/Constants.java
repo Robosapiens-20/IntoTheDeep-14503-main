@@ -52,7 +52,7 @@ public class Constants{
     public static Limelight3A limelight = null;
 
     public static void initHardware(HardwareMap hardwareMap){
-        lf = hardwareMap.dcMotor.get("lf");
+        /*lf = hardwareMap.dcMotor.get("lf");
 
         lb = hardwareMap.dcMotor.get("lb");
 
@@ -70,7 +70,7 @@ public class Constants{
 
         linkage1 = hardwareMap.servo.get("linkage1");
 
-        linkage2 = hardwareMap.servo.get("linkage2");
+        linkage2 = hardwareMap.servo.get("linkage2");*/
 
         claw = hardwareMap.servo.get("claw");
 
@@ -78,15 +78,15 @@ public class Constants{
 
         clawArm = hardwareMap.servo.get("clawArm");
 
-        intakeDrop1 = hardwareMap.servo.get("intakeDrop1");
+     //ntakeDrop1 = hardwareMap.servo.get("intakeDrop1");
 
-        intakeDrop2 = hardwareMap.servo.get("intakeDrop2");
+     // intakeDrop2 = hardwareMap.servo.get("intakeDrop2");
 
         outtakeArmL = hardwareMap.servo.get("outtakeArmL");
 
         outtakeArmR = hardwareMap.servo.get("outtakeArmR");
 
-        limelight = hardwareMap.get(Limelight3A.class, "limelight");
+     // limelight = hardwareMap.get(Limelight3A.class, "limelight");
     }
 
 }
