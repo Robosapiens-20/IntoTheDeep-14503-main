@@ -115,11 +115,11 @@ public class TeleOpMain extends LinearOpMode {
                 intakeDrop1.setPosition(0);
                 intakeDrop2.setPosition(0);
             }
-            if (g2.left_bumper)
+            if (g2.left_bumper) {
                 claw.setPosition(0);
+            }
             if (g2.right_bumper)
                 claw.setPosition(1);
-
 
         }
 

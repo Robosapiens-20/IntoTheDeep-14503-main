@@ -17,16 +17,13 @@ import com.qualcomm.robotcore.hardware.CRServo;
 public class outtaketest extends LinearOpMode {
 
     Servo claw = null;
-
-
     Servo clawWrist = null;
     Servo outtakeArmR=null;
-
     Servo clawTurret = null;
-
+    Servo intakeDrop1 = null;
+    Servo intakeDrop2 = null;
     Gamepad g1 = gamepad1;
     Gamepad g2 = gamepad2;
-
     double clawpositionclosed = 0.16;
     double clawpositionopen = 0.3;
     @Override
@@ -37,6 +34,8 @@ public class outtaketest extends LinearOpMode {
         g1.type = Gamepad.Type.SONY_PS4;
         g2.type = Gamepad.Type.SONY_PS4;
         Constants.initHardware(hardwareMap);
+        intakeDrop1=Constants.intakeDrop1;
+        intakeDrop2=Constants.intakeDrop2;
 
 
         outtakeArmR = Constants.outtakeArmR;
@@ -46,25 +45,42 @@ public class outtaketest extends LinearOpMode {
 
         waitForStart();
         while(opModeIsActive()){
-
             //if(g1.square) {
                 //outtakeArmR.setPosition(0.4);
                 //claw.setPosition(0.4);
                 //clawWrist.setPosition(0.5);
                 //clawTurret.setPosition(0.5);
             //}
-            if(g1.square) {
-                claw.setPosition(clawpositionclosed);
-                //clawWrist.setPosition(0);
-                //clawTurret.setPosition(0);
-                //claw.setPosition(0.1);
-            }
-            if(g1.circle) {
-                claw.setPosition(clawpositionclosed + 0.5);
+            if(g2.triangle) {
+                //arm towards intake
+                claw.setPosition(0);
+                sleep(300);
+
+
+                outtakeArmR.setPosition(0.07);
+
+                clawWrist.setPosition(0.07);
+                clawTurret.setPosition(0.55);
+                //claw.setPosition(0);
 
             }
+            if(g2.cross){
+                intakeDrop1.setPosition(0.1);
+                intakeDrop2.setPosition(-0.1);
+            }
+            if(g2.square){
+                intakeDrop1.setPosition(-0.1);
+                intakeDrop2.setPosition(0.1);
+            }
+            if(g2.circle) {
+                //arm towards extake
+                claw.setPosition(0.96);
+                sleep(1000);
+                outtakeArmR.setPosition(0.4);
 
-
+                clawWrist.setPosition(0.5);
+                clawTurret.setPosition(0);
+            }
         }
     }
 }
