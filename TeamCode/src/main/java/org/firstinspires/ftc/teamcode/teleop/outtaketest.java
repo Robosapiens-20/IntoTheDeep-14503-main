@@ -53,7 +53,7 @@ public class outtaketest extends LinearOpMode {
             //}
             if(g2.triangle) {
                 //arm towards intake
-                claw.setPosition(0);
+                claw.setPosition(0.72);
                 sleep(300);
 
 
@@ -74,7 +74,7 @@ public class outtaketest extends LinearOpMode {
             }
             if(g2.circle) {
                 //arm towards extake
-                claw.setPosition(0.96);
+                claw.setPosition(0.882);
                 sleep(1000);
                 outtakeArmR.setPosition(0.4);
 
