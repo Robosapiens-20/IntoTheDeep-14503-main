@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 //import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.teamcode.Constants;
 
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -22,6 +23,8 @@ public class outtaketest extends LinearOpMode {
     Servo clawTurret = null;
     Servo intakeDrop1 = null;
     Servo intakeDrop2 = null;
+    CRServo rightIntake;
+    CRServo leftIntake;
     Gamepad g1 = gamepad1;
     Gamepad g2 = gamepad2;
     double clawpositionclosed = 0.16;
@@ -34,14 +37,16 @@ public class outtaketest extends LinearOpMode {
         g1.type = Gamepad.Type.SONY_PS4;
         g2.type = Gamepad.Type.SONY_PS4;
         Constants.initHardware(hardwareMap);
-        intakeDrop1=Constants.intakeDrop1;
-        intakeDrop2=Constants.intakeDrop2;
+        //intakeDrop1=Constants.intakeDrop1;
+        //intakeDrop2=Constants.intakeDrop2;
 
-
+        rightIntake = Constants.rightIntake;
+        leftIntake = Constants.leftIntake;
         outtakeArmR = Constants.outtakeArmR;
         clawWrist = Constants.clawWrist;
         claw = Constants.claw;
         clawTurret = Constants.clawArm;
+        leftIntake.setDirection(CRServo.Direction.REVERSE);
 
         waitForStart();
         while(opModeIsActive()){
@@ -64,14 +69,14 @@ public class outtaketest extends LinearOpMode {
                 //claw.setPosition(0);
 
             }
-            if(g2.cross){
+            /*if(g2.cross){
                 intakeDrop1.setPosition(0.1);
                 intakeDrop2.setPosition(-0.1);
             }
             if(g2.square){
                 intakeDrop1.setPosition(-0.1);
                 intakeDrop2.setPosition(0.1);
-            }
+            }*/
             if(g2.circle) {
                 //arm towards extake
                 claw.setPosition(0.882);
@@ -81,6 +86,16 @@ public class outtaketest extends LinearOpMode {
                 clawWrist.setPosition(0.5);
                 clawTurret.setPosition(0);
             }
+
+            if(g2.right_bumper) {
+                leftIntake.setDirection(CRServo.Direction.REVERSE);
+            }
+            leftIntake.setPower(g2.right_trigger);
+            rightIntake.setPower(g2.right_trigger);
+
+
+
+
         }
     }
 }

@@ -51,6 +51,10 @@ public class Constants{
 
     public static Limelight3A limelight = null;
 
+    public static CRServo rightIntake = null;
+
+    public static CRServo leftIntake = null;
+
     public static void initHardware(HardwareMap hardwareMap){
         /*lf = hardwareMap.dcMotor.get("lf");
 
@@ -71,6 +75,9 @@ public class Constants{
         linkage1 = hardwareMap.servo.get("linkage1");
 
         linkage2 = hardwareMap.servo.get("linkage2");*/
+
+        rightIntake = hardwareMap.crservo.get("rightIntake");
+        leftIntake = hardwareMap.crservo.get("leftIntake");
 
         claw = hardwareMap.servo.get("claw");
 
