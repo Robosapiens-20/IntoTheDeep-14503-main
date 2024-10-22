@@ -50,6 +50,8 @@ public class Constants{
     public static Servo clawArm = null;
 
     public static Limelight3A limelight = null;
+    public static double clawOpenPosition = 0.882;
+    public static double clawClosedPosition = 0.72;
 
     public static CRServo rightIntake = null;
 

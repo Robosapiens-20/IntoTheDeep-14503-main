@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 //import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.teamcode.Constants;
 
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -37,8 +36,8 @@ public class outtaketest extends LinearOpMode {
         g1.type = Gamepad.Type.SONY_PS4;
         g2.type = Gamepad.Type.SONY_PS4;
         Constants.initHardware(hardwareMap);
-        //intakeDrop1=Constants.intakeDrop1;
-        //intakeDrop2=Constants.intakeDrop2;
+        intakeDrop1=Constants.intakeDrop1;
+        intakeDrop2=Constants.intakeDrop2;
 
         rightIntake = Constants.rightIntake;
         leftIntake = Constants.leftIntake;
@@ -46,7 +45,8 @@ public class outtaketest extends LinearOpMode {
         clawWrist = Constants.clawWrist;
         claw = Constants.claw;
         clawTurret = Constants.clawArm;
-        leftIntake.setDirection(CRServo.Direction.REVERSE);
+        clawpositionclosed= Constants.clawClosedPosition;
+        clawpositionopen=Constants.clawOpenPosition;
 
         waitForStart();
         while(opModeIsActive()){
@@ -58,7 +58,7 @@ public class outtaketest extends LinearOpMode {
             //}
             if(g2.triangle) {
                 //arm towards intake
-                claw.setPosition(0.72);
+                claw.setPosition(clawpositionclosed);
                 sleep(300);
 
 
@@ -69,33 +69,27 @@ public class outtaketest extends LinearOpMode {
                 //claw.setPosition(0);
 
             }
-            /*if(g2.cross){
+            if(g2.cross){
                 intakeDrop1.setPosition(0.1);
                 intakeDrop2.setPosition(-0.1);
             }
             if(g2.square){
                 intakeDrop1.setPosition(-0.1);
                 intakeDrop2.setPosition(0.1);
-            }*/
+            }
             if(g2.circle) {
                 //arm towards extake
-                claw.setPosition(0.882);
+                claw.setPosition(clawpositionopen);
                 sleep(1000);
                 outtakeArmR.setPosition(0.4);
-
+                sleep(1000);
                 clawWrist.setPosition(0.5);
                 clawTurret.setPosition(0);
             }
 
-            if(g2.right_bumper) {
-                leftIntake.setDirection(CRServo.Direction.REVERSE);
-            }
+            leftIntake.setDirection(CRServo.Direction.REVERSE);
             leftIntake.setPower(g2.right_trigger);
             rightIntake.setPower(g2.right_trigger);
-
-
-
-
         }
     }
 }
