@@ -16,13 +16,13 @@ public class SlidePositionTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException{
         Constants.initHardware(hardwareMap);
         ls = Constants.ls;
-        rs=Constants.rs;
+        rs = Constants.rs;
         ls.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rs.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rs.setDirection(DcMotorSimple.Direction.REVERSE);
+        ls.setDirection(DcMotorSimple.Direction.REVERSE);
         waitForStart();
         if(opModeIsActive()){
-            slideMovement(275,0.5);
+            slideMovement(1000,0.5);
         }
     }
     public static void slideMovement(int position, double speed){

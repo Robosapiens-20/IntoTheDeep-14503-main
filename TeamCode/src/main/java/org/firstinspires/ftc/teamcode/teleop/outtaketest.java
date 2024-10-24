@@ -26,6 +26,8 @@ public class outtaketest extends LinearOpMode {
     CRServo leftIntake;
     Gamepad g1 = gamepad1;
     Gamepad g2 = gamepad2;
+     DcMotor ls = null;
+     DcMotor rs = null;
     double clawpositionclosed = 0.16;
     double clawpositionopen = 0.3;
     @Override
@@ -39,14 +41,18 @@ public class outtaketest extends LinearOpMode {
         intakeDrop1=Constants.intakeDrop1;
         intakeDrop2=Constants.intakeDrop2;
 
-        rightIntake = Constants.rightIntake;
-        leftIntake = Constants.leftIntake;
+        //rightIntake = Constants.rightIntake;
+        //leftIntake = Constants.leftIntake;
+        ls =Constants.ls;
+        rs=Constants.rs;
         outtakeArmR = Constants.outtakeArmR;
         clawWrist = Constants.clawWrist;
         claw = Constants.claw;
         clawTurret = Constants.clawArm;
         clawpositionclosed= Constants.clawClosedPosition;
         clawpositionopen=Constants.clawOpenPosition;
+        ls.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rs.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         waitForStart();
         while(opModeIsActive()){
@@ -87,9 +93,11 @@ public class outtaketest extends LinearOpMode {
                 clawTurret.setPosition(0);
             }
 
-            leftIntake.setDirection(CRServo.Direction.REVERSE);
-            leftIntake.setPower(g2.right_trigger);
-            rightIntake.setPower(g2.right_trigger);
+            //leftIntake.setDirection(CRServo.Direction.REVERSE);
+            //leftIntake.setPower(g2.right_trigger);
+            //rightIntake.setPower(g2.right_trigger);
+            ls.setPower(gamepad2.left_stick_y*0.5);
+            rs.setPower(-gamepad2.left_stick_y*0.5);
         }
     }
 }

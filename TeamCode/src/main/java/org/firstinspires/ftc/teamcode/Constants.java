@@ -66,20 +66,20 @@ public class Constants{
 
         rb = hardwareMap.dcMotor.get("rb");
 
-        intake = hardwareMap.dcMotor.get("intake");
+        intake = hardwareMap.dcMotor.get("intake");*/
 
         ls = hardwareMap.dcMotor.get("ls");
 
         rs = hardwareMap.dcMotor.get("rs");
 
-        winch = hardwareMap.dcMotor.get("winch");
+       /* winch = hardwareMap.dcMotor.get("winch");
 
         linkage1 = hardwareMap.servo.get("linkage1");
 
         linkage2 = hardwareMap.servo.get("linkage2");*/
 
-        rightIntake = hardwareMap.crservo.get("rightIntake");
-        leftIntake = hardwareMap.crservo.get("leftIntake");
+        //rightIntake = hardwareMap.crservo.get("rightIntake");
+        //leftIntake = hardwareMap.crservo.get("leftIntake");
 
         claw = hardwareMap.servo.get("claw");
 
