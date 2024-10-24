@@ -95,7 +95,7 @@ public class Constants{
 
         outtakeArmR = hardwareMap.servo.get("outtakeArmR");
 
-     // limelight = hardwareMap.get(Limelight3A.class, "limelight");
+      limelight = hardwareMap.get(Limelight3A.class, "limelight");
     }
 
 }
