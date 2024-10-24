@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 //import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.teamcode.Constants;
 
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -51,8 +52,11 @@ public class outtaketest extends LinearOpMode {
         clawTurret = Constants.clawArm;
         clawpositionclosed= Constants.clawClosedPosition;
         clawpositionopen=Constants.clawOpenPosition;
+        rightIntake = Constants.rightIntake;
+        leftIntake = Constants.leftIntake;
         ls.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rs.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightIntake.setDirection(CRServo.Direction.REVERSE);
 
         waitForStart();
         while(opModeIsActive()){
@@ -92,6 +96,18 @@ public class outtaketest extends LinearOpMode {
                 clawWrist.setPosition(0.5);
                 clawTurret.setPosition(0);
             }
+
+
+            rightIntake.setPower(g2.right_trigger);
+            leftIntake.setPower(g2.right_trigger);
+
+
+            if(g2.right_bumper){
+                rightIntake.setDirection(CRServo.Direction.REVERSE);
+                leftIntake.setDirection(CRServo.Direction.REVERSE);
+            }
+
+
 
             //leftIntake.setDirection(CRServo.Direction.REVERSE);
             //leftIntake.setPower(g2.right_trigger);
