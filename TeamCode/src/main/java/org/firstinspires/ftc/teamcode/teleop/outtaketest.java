@@ -25,6 +25,8 @@ public class outtaketest extends LinearOpMode {
     Servo intakeDrop2 = null;
     CRServo rightIntake;
     CRServo leftIntake;
+    Servo linkage1 = null;
+    Servo linkage2=null;
     Gamepad g1 = gamepad1;
     Gamepad g2 = gamepad2;
      DcMotor ls = null;
@@ -41,6 +43,8 @@ public class outtaketest extends LinearOpMode {
         Constants.initHardware(hardwareMap);
         intakeDrop1=Constants.intakeDrop1;
         intakeDrop2=Constants.intakeDrop2;
+        linkage1 = Constants.linkage1;
+        linkage2 = Constants.linkage2;
 
         //rightIntake = Constants.rightIntake;
         //leftIntake = Constants.leftIntake;
@@ -79,7 +83,7 @@ public class outtaketest extends LinearOpMode {
                 //claw.setPosition(0);
 
             }
-            if(g1.triangle) {
+            if(g2.triangle) {
                 //arm towards intake
                 claw.setPosition(clawpositionopen);
                 sleep(300);
@@ -92,7 +96,7 @@ public class outtaketest extends LinearOpMode {
                 //claw.setPosition(0);
 
             }
-            if(g1.circle) {
+            if(g2.circle) {
                 //arm towards extake
                 claw.setPosition(clawpositionclosed);
                 sleep(1000);
@@ -101,13 +105,24 @@ public class outtaketest extends LinearOpMode {
                 clawWrist.setPosition(0.5);
                 clawTurret.setPosition(0);
             }
-            if(g2.cross){
+            if(g1.cross){
+                leftIntake.setPower(0);
+                rightIntake.setPower(0);
                 intakeDrop1.setPosition(0.9);
                 intakeDrop2.setPosition(0.9);
+                linkage1.setPosition(0.6);
+                linkage2.setPosition(0.6);
+
+
             }
-            if(g2.square){
+            if(g1.square){
                 intakeDrop1.setPosition(0);
                 intakeDrop2.setPosition(0);
+                linkage1.setPosition(0);
+                linkage2.setPosition(0);
+                leftIntake.setPower(1);
+                rightIntake.setPower(1);
+
             }
             if(g2.circle) {
                 //arm towards extake
@@ -118,25 +133,20 @@ public class outtaketest extends LinearOpMode {
                 clawWrist.setPosition(0.5);
                 clawTurret.setPosition(0);
             }
-
+            if(g1.dpad_right){
+                linkage1.setPosition(0.6);
+                linkage2.setPosition(0.6);
+            }
+            if(g1.dpad_left){
+                linkage1.setPosition(0);
+                linkage2.setPosition(0);
+            }
 
             rightIntake.setPower(g2.right_trigger);
             rightIntake.setDirection(CRServo.Direction.REVERSE);
             leftIntake.setPower(g2.right_trigger);
-
-
-            /*if(g2.right_bumper){
-                rightIntake.setDirection(CRServo.Direction.REVERSE);
-                leftIntake.setDirection(CRServo.Direction.REVERSE);
-            }*/
-
-
-
-            //leftIntake.setDirection(CRServo.Direction.REVERSE);
-            //leftIntake.setPower(g2.right_trigger);
-            //rightIntake.setPower(g2.right_trigger);
-            ls.setPower(gamepad2.left_stick_y);
-            rs.setPower(-gamepad2.left_stick_y);
+            ls.setPower(g2.left_stick_y);
+            rs.setPower(-g2.left_stick_y);
         }
     }
 }
