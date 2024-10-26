@@ -64,9 +64,7 @@ public class Constants{
 
         rf = hardwareMap.dcMotor.get("rf");
 
-        rb = hardwareMap.dcMotor.get("rb");
-
-        intake = hardwareMap.dcMotor.get("intake");*/
+        rb = hardwareMap.dcMotor.get("rb");*/
 
         ls = hardwareMap.dcMotor.get("ls");
 
@@ -78,8 +76,8 @@ public class Constants{
 
         linkage2 = hardwareMap.servo.get("linkage2");*/
 
-        //rightIntake = hardwareMap.crservo.get("rightIntake");
-        //leftIntake = hardwareMap.crservo.get("leftIntake");
+        rightIntake = hardwareMap.crservo.get("rightIntake");
+        leftIntake = hardwareMap.crservo.get("leftIntake");
 
         claw = hardwareMap.servo.get("claw");
 
@@ -95,7 +93,7 @@ public class Constants{
 
         outtakeArmR = hardwareMap.servo.get("outtakeArmR");
 
-      limelight = hardwareMap.get(Limelight3A.class, "limelight");
+      //limelight = hardwareMap.get(Limelight3A.class, "limelight");
     }
 
 }

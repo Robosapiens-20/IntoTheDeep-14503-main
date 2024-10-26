@@ -72,20 +72,42 @@ public class outtaketest extends LinearOpMode {
                 sleep(300);
 
 
-                outtakeArmR.setPosition(0.07);
+                outtakeArmR.setPosition(0.27);
 
-                clawWrist.setPosition(0.07);
-                clawTurret.setPosition(0.55);
+                clawWrist.setPosition(0.22);
+                clawTurret.setPosition(0.5);
                 //claw.setPosition(0);
 
             }
+            if(g1.triangle) {
+                //arm towards intake
+                claw.setPosition(clawpositionopen);
+                sleep(300);
+
+
+                outtakeArmR.setPosition(0.27);
+
+                clawWrist.setPosition(0.22);
+                clawTurret.setPosition(0.5);
+                //claw.setPosition(0);
+
+            }
+            if(g1.circle) {
+                //arm towards extake
+                claw.setPosition(clawpositionclosed);
+                sleep(1000);
+                outtakeArmR.setPosition(0.4);
+                sleep(1000);
+                clawWrist.setPosition(0.5);
+                clawTurret.setPosition(0);
+            }
             if(g2.cross){
-                intakeDrop1.setPosition(0.1);
-                intakeDrop2.setPosition(-0.1);
+                intakeDrop1.setPosition(0.9);
+                intakeDrop2.setPosition(0.9);
             }
             if(g2.square){
-                intakeDrop1.setPosition(-0.1);
-                intakeDrop2.setPosition(0.1);
+                intakeDrop1.setPosition(0);
+                intakeDrop2.setPosition(0);
             }
             if(g2.circle) {
                 //arm towards extake
@@ -99,21 +121,22 @@ public class outtaketest extends LinearOpMode {
 
 
             rightIntake.setPower(g2.right_trigger);
+            rightIntake.setDirection(CRServo.Direction.REVERSE);
             leftIntake.setPower(g2.right_trigger);
 
 
-            if(g2.right_bumper){
+            /*if(g2.right_bumper){
                 rightIntake.setDirection(CRServo.Direction.REVERSE);
                 leftIntake.setDirection(CRServo.Direction.REVERSE);
-            }
+            }*/
 
 
 
             //leftIntake.setDirection(CRServo.Direction.REVERSE);
             //leftIntake.setPower(g2.right_trigger);
             //rightIntake.setPower(g2.right_trigger);
-            ls.setPower(gamepad2.left_stick_y*0.5);
-            rs.setPower(-gamepad2.left_stick_y*0.5);
+            ls.setPower(gamepad2.left_stick_y);
+            rs.setPower(-gamepad2.left_stick_y);
         }
     }
 }
