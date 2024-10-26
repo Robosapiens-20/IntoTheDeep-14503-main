@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.Constants;
 
-@Autonomous(name = "FreakySlides")
+@Autonomous(name = "FreakySlidesTesting")
 public class SlidePositionTest extends LinearOpMode {
     static DcMotor ls = null;
     static DcMotor rs = null;

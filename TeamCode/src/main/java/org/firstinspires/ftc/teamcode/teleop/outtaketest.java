@@ -16,7 +16,10 @@ import com.qualcomm.robotcore.hardware.CRServo;
 
 @TeleOp(name = "outtake test")
 public class outtaketest extends LinearOpMode {
-
+    DcMotor lf = null;
+    DcMotor lb = null;
+    DcMotor rb = null;
+    DcMotor rf = null;
     Servo claw = null;
     Servo clawWrist = null;
     Servo outtakeArmR=null;
@@ -45,6 +48,10 @@ public class outtaketest extends LinearOpMode {
         intakeDrop2=Constants.intakeDrop2;
         linkage1 = Constants.linkage1;
         linkage2 = Constants.linkage2;
+        lf = Constants.lf;
+        lb = Constants.lb;
+        rb = Constants.rb;
+        rf = Constants.rf;
 
         //rightIntake = Constants.rightIntake;
         //leftIntake = Constants.leftIntake;
@@ -64,12 +71,23 @@ public class outtaketest extends LinearOpMode {
 
         waitForStart();
         while(opModeIsActive()){
-            //if(g1.square) {
-                //outtakeArmR.setPosition(0.4);
-                //claw.setPosition(0.4);
-                //clawWrist.setPosition(0.5);
-                //clawTurret.setPosition(0.5);
-            //}
+            double y = -g1.left_stick_y;
+            double x = g1.left_stick_x * 1.1; // Counteract imperfect strafing
+            double rx = g1.right_stick_x;
+
+            // Denominator is the largest motor power (absolute value) or 1
+            // This ensures all the powers maintain the same ratio,
+            // but only if at least one is out of the range [-1, 1]
+            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+            double frontLeftPower = (y + x + rx) / denominator;
+            double backLeftPower = (y - x + rx) / denominator;
+            double frontRightPower = (y - x - rx) / denominator;
+            double backRightPower = (y + x - rx) / denominator;
+
+            lf.setPower(frontLeftPower);
+            lb.setPower(backLeftPower);
+            rf.setPower(frontRightPower);
+            rb.setPower(backRightPower);
             if(g2.triangle) {
                 //arm towards intake
                 claw.setPosition(clawpositionclosed);
