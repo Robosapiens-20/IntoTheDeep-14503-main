@@ -134,6 +134,7 @@ public class outtaketest extends LinearOpMode {
             if(g1.dpad_right){
                 linkage1.setPosition(Constants.linkageOut);
                 linkage2.setPosition(Constants.linkageOut);
+                
             }
             telemetry.addData("Lift left Encoder Value: ",ls.getCurrentPosition());
             telemetry.addData("Lift right Encoder Value: ", rs.getCurrentPosition());
