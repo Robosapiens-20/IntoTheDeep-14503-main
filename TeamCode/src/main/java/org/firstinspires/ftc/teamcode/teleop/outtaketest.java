@@ -51,8 +51,8 @@ public class outtaketest extends LinearOpMode {
         lb = Constants.lb;
         rb = Constants.rb;
         rf = Constants.rf;
-        rf.setDirection(DcMotor.Direction.REVERSE);
-        rb.setDirection(DcMotor.Direction.REVERSE);
+        lf.setDirection(DcMotor.Direction.REVERSE);
+        lb.setDirection(DcMotor.Direction.REVERSE);
 
         //rightIntake = Constants.rightIntake;
         //leftIntake = Constants.leftIntake;
@@ -75,7 +75,7 @@ public class outtaketest extends LinearOpMode {
 
         waitForStart();
         while(opModeIsActive()){
-            double y = g1.left_stick_y;
+            double y = -g1.left_stick_y;
             double x = g1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = g1.right_stick_x;
 
