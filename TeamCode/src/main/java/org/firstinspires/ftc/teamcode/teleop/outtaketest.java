@@ -72,6 +72,7 @@ public class outtaketest extends LinearOpMode {
         intakeDrop2.setPosition(Constants.intakeDropin);
         linkage1.setPosition(Constants.linkageIn);
         linkage2.setPosition(Constants.linkageIn);
+        boolean clawOpened = false;
 
         waitForStart();
         while(opModeIsActive()){
@@ -112,11 +113,15 @@ public class outtaketest extends LinearOpMode {
                 sleep(1000);
                 outtakeArmR.setPosition(0.4);
                 sleep(1000);
-                clawWrist.setPosition(0.01);
+                clawWrist.setPosition(0.1);
                 clawTurret.setPosition(0);
             }
-            if(g2.cross){
-                claw.setPosition(clawpositionopen);
+            if(g2.left_bumper){
+                outtakeArmR.setPosition(0.4);
+                sleep(1000);
+                clawWrist.setPosition(0.2);
+                clawTurret.setPosition(0);
+
             }
             if(g1.cross){
                 intakeDrop1.setPosition(Constants.intakeDropout);
@@ -134,7 +139,28 @@ public class outtaketest extends LinearOpMode {
             if(g1.dpad_right){
                 linkage1.setPosition(Constants.linkageOut);
                 linkage2.setPosition(Constants.linkageOut);
-                
+
+            }
+            if(g2.right_bumper){
+                claw.setPosition(clawpositionopen);
+                outtakeArmR.setPosition(0.76);
+                sleep(1000);
+                clawTurret.setPosition(0.25);
+                sleep(300);
+                clawWrist.setPosition(0.7172);
+            }
+            if(claw.getPosition() == clawpositionclosed){
+                clawOpened = false;
+            } else if(claw.getPosition() == clawpositionopen){
+                clawOpened = true;
+            }
+
+            if(g2.cross && clawOpened){
+                claw.setPosition(clawpositionclosed);
+                sleep(100);
+            } else if(g2.cross && clawOpened==false){
+                claw.setPosition(clawpositionopen);
+                sleep(100);
             }
             telemetry.addData("Lift left Encoder Value: ",ls.getCurrentPosition());
             telemetry.addData("Lift right Encoder Value: ", rs.getCurrentPosition());
@@ -142,8 +168,11 @@ public class outtaketest extends LinearOpMode {
             telemetry.addData("LinkageR Position: ", linkage2.getPosition());
             telemetry.addData("Intake Drop Left Position", intakeDrop1.getPosition());
             telemetry.addData("Intake Drop Right Position", intakeDrop2.getPosition());
+            telemetry.addData("Claw Wrist Position: ", clawWrist.getPosition());
             telemetry.update();
-
+            if(g2.left_trigger>0.01||g2.right_trigger>0.01){
+                clawWrist.setPosition(clawWrist.getPosition()+g2.left_trigger-g2.right_trigger);
+            }
             rightIntake.setPower(g1.right_trigger-g1.left_trigger);
             rightIntake.setDirection(CRServo.Direction.REVERSE);
             leftIntake.setPower(g1.right_trigger-g1.left_trigger);
@@ -155,8 +184,6 @@ public class outtaketest extends LinearOpMode {
 
 
         }
-
-
 
     }
     public void slideMovement(int position, double speed) {
