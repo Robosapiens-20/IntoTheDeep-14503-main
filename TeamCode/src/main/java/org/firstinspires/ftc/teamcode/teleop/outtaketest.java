@@ -1,15 +1,11 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
-
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
-//import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.teamcode.Constants;
-
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -22,7 +18,7 @@ public class outtaketest extends LinearOpMode {
     DcMotor rf = null;
     Servo claw = null;
     Servo clawWrist = null;
-    Servo outtakeArmL = null;
+   // Servo outtakeArmL = null;
     Servo outtakeArmR=null;
     Servo clawTurret = null;
     Servo intakeDrop1 = null;
@@ -49,11 +45,13 @@ public class outtaketest extends LinearOpMode {
         intakeDrop2=Constants.intakeDrop2;
         linkage1 = Constants.linkage1;
         linkage2 = Constants.linkage2;
-        outtakeArmL=Constants.outtakeArmL;
-       /* lf = Constants.lf;
+       // outtakeArmL=Constants.outtakeArmL;
+        lf = Constants.lf;
         lb = Constants.lb;
         rb = Constants.rb;
-        rf = Constants.rf;*/
+        rf = Constants.rf;
+        rf.setDirection(DcMotor.Direction.REVERSE);
+        rb.setDirection(DcMotor.Direction.REVERSE);
 
         //rightIntake = Constants.rightIntake;
         //leftIntake = Constants.leftIntake;
@@ -69,21 +67,21 @@ public class outtaketest extends LinearOpMode {
         leftIntake = Constants.leftIntake;
         rightIntake.setDirection(CRServo.Direction.REVERSE);
         ls.setDirection(DcMotor.Direction.REVERSE);
-        intakeDrop1.setPosition(0.9);
-        intakeDrop2.setPosition(0.9);
-        linkage1.setPosition(0.15);
-        linkage2.setPosition(0.15);
+        intakeDrop1.setPosition(Constants.intakeDropin);
+        intakeDrop2.setPosition(Constants.intakeDropin);
+        linkage1.setPosition(Constants.linkageIn);
+        linkage2.setPosition(Constants.linkageIn);
 
         waitForStart();
         while(opModeIsActive()){
-            double y = -g1.left_stick_y;
+            double y = g1.left_stick_y;
             double x = g1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = g1.right_stick_x;
 
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio,
             // but only if at least one is out of the range [-1, 1]
-            /*double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
             double frontLeftPower = (y + x + rx) / denominator;
             double backLeftPower = (y - x + rx) / denominator;
             double frontRightPower = (y - x - rx) / denominator;
@@ -92,67 +90,49 @@ public class outtaketest extends LinearOpMode {
             lf.setPower(frontLeftPower);
             lb.setPower(backLeftPower);
             rf.setPower(frontRightPower);
-            rb.setPower(backRightPower);*/
+            rb.setPower(backRightPower);
             if(g2.triangle) {
                 //arm towards intake
                 claw.setPosition(clawpositionclosed);
                 sleep(300);
 
+               outtakeArmR.setPosition(0.3);
 
-                outtakeArmR.setPosition(0.27);
-
-                clawWrist.setPosition(0.22);
-                clawTurret.setPosition(0.5);
-                //claw.setPosition(0);
-
-            }
-            if(g2.triangle) {
-                //arm towards intake
-                claw.setPosition(clawpositionopen);
-                sleep(300);
-
-
-                outtakeArmR.setPosition(0.27);
-
-                clawWrist.setPosition(0.22);
-                clawTurret.setPosition(0.5);
+                clawWrist.setPosition(0.6);
+                clawTurret.setPosition(0.52);
                 //claw.setPosition(0);
 
             }
             if(g2.circle) {
                 //arm towards extake
-                claw.setPosition(clawpositionclosed);
+                outtakeArmR.setPosition(0.23);
+                sleep(1000);
+                claw.setPosition(clawpositionopen);
                 sleep(1000);
                 outtakeArmR.setPosition(0.4);
                 sleep(1000);
-                clawWrist.setPosition(0.5);
+                clawWrist.setPosition(0.01);
                 clawTurret.setPosition(0);
+            }
+            if(g2.cross){
+                claw.setPosition(clawpositionopen);
             }
             if(g1.cross){
-                intakeDrop1.setPosition(0.9);
-                intakeDrop2.setPosition(0.9);
+                intakeDrop1.setPosition(Constants.intakeDropout);
+                intakeDrop2.setPosition(Constants.intakeDropout);
             }
             if(g1.square){
-                intakeDrop1.setPosition(0);
-                intakeDrop2.setPosition(0);
+                intakeDrop1.setPosition(Constants.intakeDropin);
+                intakeDrop2.setPosition(Constants.intakeDropin);
 
             }
-            if(g2.circle) {
-                //arm towards extake
-                claw.setPosition(clawpositionopen);
-                sleep(1000);
-                outtakeArmR.setPosition(0.4);
-                sleep(1000);
-                clawWrist.setPosition(0.5);
-                clawTurret.setPosition(0);
-            }
             if(g1.dpad_left){
-                linkage1.setPosition(0.15);
-                linkage2.setPosition(0.15);
+                linkage1.setPosition(Constants.linkageIn);
+                linkage2.setPosition(Constants.linkageIn);
             }
             if(g1.dpad_right){
-                linkage1.setPosition(0);
-                linkage2.setPosition(0);
+                linkage1.setPosition(Constants.linkageOut);
+                linkage2.setPosition(Constants.linkageOut);
             }
             telemetry.addData("Lift left Encoder Value: ",ls.getCurrentPosition());
             telemetry.addData("Lift right Encoder Value: ", rs.getCurrentPosition());
@@ -162,22 +142,31 @@ public class outtaketest extends LinearOpMode {
             telemetry.addData("Intake Drop Right Position", intakeDrop2.getPosition());
             telemetry.update();
 
-            rightIntake.setPower(g1.right_trigger);
+            rightIntake.setPower(g1.right_trigger-g1.left_trigger);
             rightIntake.setDirection(CRServo.Direction.REVERSE);
-            leftIntake.setPower(g1.right_trigger);
+            leftIntake.setPower(g1.right_trigger-g1.left_trigger);
             ls.setPower(-g2.left_stick_y);
             rs.setPower(-g2.left_stick_y);
             if(g2.dpad_up){
-                Constants.slideMovement(Constants.slideTopBasketPos,1);
-                while(ls.isBusy() && rs.isBusy()) {
-                    idle();
-                }
-
+                slideMovement(Constants.slideTopBasketPos,1);
             }
 
 
         }
 
+
+
+    }
+    public void slideMovement(int position, double speed) {
+        ls.setTargetPosition(position);
+        rs.setTargetPosition(position);
+        rs.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        ls.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        ls.setPower(speed);
+        rs.setPower(speed);
+        while(ls.isBusy()&&rs.isBusy()&&opModeIsActive()){
+            idle();
+        }
 
     }
 

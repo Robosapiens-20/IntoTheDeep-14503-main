@@ -13,7 +13,7 @@ public class SlidePositionTest extends LinearOpMode {
     static DcMotor rs = null;
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode() throws InterruptedException {
         Constants.initHardware(hardwareMap);
         ls = Constants.ls;
         rs = Constants.rs;
@@ -21,17 +21,22 @@ public class SlidePositionTest extends LinearOpMode {
         rs.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         ls.setDirection(DcMotorSimple.Direction.REVERSE);
         waitForStart();
-        if(opModeIsActive()){
-            slideMovement(Constants.slideTopBasketPos,0.8);
+        if (opModeIsActive()) {
+            slideMovement(Constants.slideTopBasketPos, 0.8);
         }
+
     }
-    public static void slideMovement(int position, double speed){
+    public void slideMovement(int position, double speed) {
         ls.setTargetPosition(position);
         rs.setTargetPosition(position);
         rs.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         ls.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         ls.setPower(speed);
         rs.setPower(speed);
+        while(ls.isBusy()&&rs.isBusy()&&opModeIsActive()){
+            idle();
+        }
 
     }
+
 }

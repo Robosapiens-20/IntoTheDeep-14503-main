@@ -51,13 +51,17 @@ public class Constants{
     public static Servo clawArm = null;
 
     public static Limelight3A limelight = null;
-    public static double clawOpenPosition = 0.882;
-    public static double clawClosedPosition = 0.72;
+    public static double clawOpenPosition = 0.89;
+    public static double clawClosedPosition = 0.73;
     public static int slideTopBasketPos = 2116;
     public static CRServo rightIntake = null;
 
     public static CRServo leftIntake = null;
     public static int slidePosCurrent = 0;
+    public static double intakeDropin = 0;
+    public static double intakeDropout = 0.9;
+    public static double linkageIn = 0.15;
+    public static double linkageOut = 0;
     public static void slideMovement(int position, double speed){
         Constants.slidePosCurrent+=position;
         ls.setTargetPosition(Constants.slidePosCurrent);
@@ -71,13 +75,13 @@ public class Constants{
     }
 
     public static void initHardware(HardwareMap hardwareMap){
-        /*lf = hardwareMap.dcMotor.get("lf");
+        lf = hardwareMap.dcMotor.get("lf");
 
         lb = hardwareMap.dcMotor.get("lb");
 
         rf = hardwareMap.dcMotor.get("rf");
 
-        rb = hardwareMap.dcMotor.get("rb");*/
+        rb = hardwareMap.dcMotor.get("rb");
 
         ls = hardwareMap.dcMotor.get("ls");
         ls.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -108,7 +112,7 @@ public class Constants{
 
      intakeDrop2 = hardwareMap.servo.get("intakeDrop2");
 
-        outtakeArmL = hardwareMap.servo.get("outtakeArmL");
+       // outtakeArmL = hardwareMap.servo.get("outtakeArmL");
 
         outtakeArmR = hardwareMap.servo.get("outtakeArmR");
        // ls.setDirection(DcMotorSimple.Direction.REVERSE);
