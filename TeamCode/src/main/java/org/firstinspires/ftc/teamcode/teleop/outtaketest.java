@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 //import org.firstinspires.ftc.robotcore.external.Const;
+import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.teamcode.Constants;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -48,10 +49,10 @@ public class outtaketest extends LinearOpMode {
         intakeDrop2=Constants.intakeDrop2;
         linkage1 = Constants.linkage1;
         linkage2 = Constants.linkage2;
-        lf = Constants.lf;
+       /* lf = Constants.lf;
         lb = Constants.lb;
         rb = Constants.rb;
-        rf = Constants.rf;
+        rf = Constants.rf;*/
 
         //rightIntake = Constants.rightIntake;
         //leftIntake = Constants.leftIntake;
@@ -65,9 +66,10 @@ public class outtaketest extends LinearOpMode {
         clawpositionopen=Constants.clawOpenPosition;
         rightIntake = Constants.rightIntake;
         leftIntake = Constants.leftIntake;
-        ls.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rs.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightIntake.setDirection(CRServo.Direction.REVERSE);
+        ls.setDirection(DcMotor.Direction.REVERSE);
+        intakeDrop1.setPosition(0.9);
+        intakeDrop2.setPosition(0.9);
 
         waitForStart();
         while(opModeIsActive()){
@@ -78,7 +80,7 @@ public class outtaketest extends LinearOpMode {
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio,
             // but only if at least one is out of the range [-1, 1]
-            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+            /*double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
             double frontLeftPower = (y + x + rx) / denominator;
             double backLeftPower = (y - x + rx) / denominator;
             double frontRightPower = (y - x - rx) / denominator;
@@ -87,7 +89,7 @@ public class outtaketest extends LinearOpMode {
             lf.setPower(frontLeftPower);
             lb.setPower(backLeftPower);
             rf.setPower(frontRightPower);
-            rb.setPower(backRightPower);
+            rb.setPower(backRightPower);*/
             if(g2.triangle) {
                 //arm towards intake
                 claw.setPosition(clawpositionclosed);
@@ -124,22 +126,12 @@ public class outtaketest extends LinearOpMode {
                 clawTurret.setPosition(0);
             }
             if(g1.cross){
-                leftIntake.setPower(0);
-                rightIntake.setPower(0);
                 intakeDrop1.setPosition(0.9);
                 intakeDrop2.setPosition(0.9);
-                linkage1.setPosition(0.6);
-                linkage2.setPosition(0.6);
-
-
             }
             if(g1.square){
                 intakeDrop1.setPosition(0);
                 intakeDrop2.setPosition(0);
-                linkage1.setPosition(0);
-                linkage2.setPosition(0);
-                leftIntake.setPower(1);
-                rightIntake.setPower(1);
 
             }
             if(g2.circle) {
@@ -151,20 +143,40 @@ public class outtaketest extends LinearOpMode {
                 clawWrist.setPosition(0.5);
                 clawTurret.setPosition(0);
             }
-            if(g1.dpad_right){
-                linkage1.setPosition(0.6);
-                linkage2.setPosition(0.6);
-            }
             if(g1.dpad_left){
+                linkage1.setPosition(0.15);
+                linkage2.setPosition(0.15);
+            }
+            if(g1.dpad_right){
                 linkage1.setPosition(0);
                 linkage2.setPosition(0);
             }
+            telemetry.addData("Lift left Encoder Value: ",ls.getCurrentPosition());
+            telemetry.addData("Lift right Encoder Value: ", rs.getCurrentPosition());
+            telemetry.addData("LinkageL Position: ", linkage1.getPosition());
+            telemetry.addData("LinkageR Position: ", linkage2.getPosition());
+            telemetry.addData("Intake Drop Left Position", intakeDrop1.getPosition());
+            telemetry.addData("Intake Drop Right Position", intakeDrop2.getPosition());
+            telemetry.update();
 
-            rightIntake.setPower(g2.right_trigger);
+            rightIntake.setPower(g1.right_trigger);
             rightIntake.setDirection(CRServo.Direction.REVERSE);
-            leftIntake.setPower(g2.right_trigger);
-            ls.setPower(g2.left_stick_y);
+            leftIntake.setPower(g1.right_trigger);
+            ls.setPower(-g2.left_stick_y);
             rs.setPower(-g2.left_stick_y);
+            if(g2.dpad_up){
+                Constants.slideMovement(Constants.slideTopBasketPos,1);
+                while(ls.isBusy() && rs.isBusy()) {
+                    idle();
+                }
+
+            }
+
+
         }
+
+
     }
+
+
 }

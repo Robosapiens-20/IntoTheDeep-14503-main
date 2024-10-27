@@ -22,7 +22,7 @@ public class SlidePositionTest extends LinearOpMode {
         ls.setDirection(DcMotorSimple.Direction.REVERSE);
         waitForStart();
         if(opModeIsActive()){
-            slideMovement(1000,0.5);
+            slideMovement(Constants.slideTopBasketPos,0.8);
         }
     }
     public static void slideMovement(int position, double speed){

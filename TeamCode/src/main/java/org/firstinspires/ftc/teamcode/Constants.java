@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -52,10 +53,22 @@ public class Constants{
     public static Limelight3A limelight = null;
     public static double clawOpenPosition = 0.882;
     public static double clawClosedPosition = 0.72;
-
+    public static int slideTopBasketPos = 2116;
     public static CRServo rightIntake = null;
 
     public static CRServo leftIntake = null;
+    public static int slidePosCurrent = 0;
+    public static void slideMovement(int position, double speed){
+        Constants.slidePosCurrent+=position;
+        ls.setTargetPosition(Constants.slidePosCurrent);
+        rs.setTargetPosition(Constants.slidePosCurrent);
+        rs.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        ls.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        ls.setPower(speed);
+        rs.setPower(speed);
+
+
+    }
 
     public static void initHardware(HardwareMap hardwareMap){
         /*lf = hardwareMap.dcMotor.get("lf");
@@ -67,14 +80,20 @@ public class Constants{
         rb = hardwareMap.dcMotor.get("rb");*/
 
         ls = hardwareMap.dcMotor.get("ls");
+        ls.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ls.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        ls.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         rs = hardwareMap.dcMotor.get("rs");
+        rs.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rs.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rs.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-       /* winch = hardwareMap.dcMotor.get("winch");
+       // winch = hardwareMap.dcMotor.get("winch");
 
         linkage1 = hardwareMap.servo.get("linkage1");
 
-        linkage2 = hardwareMap.servo.get("linkage2");*/
+        linkage2 = hardwareMap.servo.get("linkage2");
 
         rightIntake = hardwareMap.crservo.get("rightIntake");
         leftIntake = hardwareMap.crservo.get("leftIntake");
@@ -92,6 +111,7 @@ public class Constants{
         outtakeArmL = hardwareMap.servo.get("outtakeArmL");
 
         outtakeArmR = hardwareMap.servo.get("outtakeArmR");
+       // ls.setDirection(DcMotorSimple.Direction.REVERSE);
 
       //limelight = hardwareMap.get(Limelight3A.class, "limelight");
     }
