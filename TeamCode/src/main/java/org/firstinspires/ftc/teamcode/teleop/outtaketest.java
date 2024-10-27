@@ -23,6 +23,7 @@ public class outtaketest extends LinearOpMode {
     DcMotor rf = null;
     Servo claw = null;
     Servo clawWrist = null;
+    Servo outtakeArmL = null;
     Servo outtakeArmR=null;
     Servo clawTurret = null;
     Servo intakeDrop1 = null;
@@ -49,6 +50,7 @@ public class outtaketest extends LinearOpMode {
         intakeDrop2=Constants.intakeDrop2;
         linkage1 = Constants.linkage1;
         linkage2 = Constants.linkage2;
+        outtakeArmL=Constants.outtakeArmL;
        /* lf = Constants.lf;
         lb = Constants.lb;
         rb = Constants.rb;
@@ -70,6 +72,8 @@ public class outtaketest extends LinearOpMode {
         ls.setDirection(DcMotor.Direction.REVERSE);
         intakeDrop1.setPosition(0.9);
         intakeDrop2.setPosition(0.9);
+        linkage1.setPosition(0.15);
+        linkage2.setPosition(0.15);
 
         waitForStart();
         while(opModeIsActive()){
