@@ -171,10 +171,10 @@ public class outtaketest extends LinearOpMode {
 
             if(g2.cross && clawOpened){
                 claw.setPosition(clawpositionclosed);
-                sleep(100);
+                sleep(200);
             } else if(g2.cross && clawOpened==false){
                 claw.setPosition(clawpositionopen);
-                sleep(100);
+                sleep(200);
             }
             telemetry.addData("Lift left Encoder Value: ",ls.getCurrentPosition());
             telemetry.addData("Lift right Encoder Value: ", rs.getCurrentPosition());
