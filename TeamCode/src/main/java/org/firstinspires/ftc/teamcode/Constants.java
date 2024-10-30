@@ -59,7 +59,7 @@ public class Constants{
     public static CRServo leftIntake = null;
     public static int slidePosCurrent = 0;
     public static double intakeDropin = 0;
-    public static double intakeDropout = 0.9;
+    public static double intakeDropout = 0.93;
     public static double linkageIn = 0.15;
     public static double linkageOut = 0;
     public static void slideMovement(int position, double speed){

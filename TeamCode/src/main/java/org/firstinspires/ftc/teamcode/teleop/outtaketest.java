@@ -95,27 +95,40 @@ public class outtaketest extends LinearOpMode {
             rb.setPower(backRightPower);
             if(g2.triangle) {
                 //arm towards intake
-                claw.setPosition(clawpositionclosed);
+                claw.setPosition(clawpositionopen);
                 sleep(300);
+                clawTurret.setPosition(0.65);
+                clawWrist.setPosition(0.67);
 
-               outtakeArmR.setPosition(0.3);
+               outtakeArmR.setPosition(0.15);
 
-                clawWrist.setPosition(0.57);
-                clawTurret.setPosition(0.25);
+
                 //claw.setPosition(0);
 
             }
             if(g2.circle) {
                 //arm towards extake
-                outtakeArmR.setPosition(0.23);
+                outtakeArmR.setPosition(0.08);
                 sleep(1000);
-                claw.setPosition(clawpositionopen);
+                claw.setPosition(clawpositionclosed);
                 sleep(1000);
-                outtakeArmR.setPosition(0.4);
+                outtakeArmR.setPosition(0.3);
                 sleep(1000);
-                clawWrist.setPosition(0.1);
-                clawTurret.setPosition(0);
+                clawWrist.setPosition(0.45);
+                clawTurret.setPosition(0.1);
             }
+            if(g2.dpad_down){
+                clawWrist.setPosition(0.41);
+                claw.setPosition(clawpositionopen);
+                clawWrist.setPosition(0.45);
+                sleep(300);
+                clawTurret.setPosition(0.65);
+                clawWrist.setPosition(0.67);
+
+                outtakeArmR.setPosition(0.15);
+
+            }
+
 
             if(g1.cross){
                 intakeDrop1.setPosition(Constants.intakeDropout);
@@ -171,9 +184,9 @@ public class outtaketest extends LinearOpMode {
             telemetry.addData("Intake Drop Right Position", intakeDrop2.getPosition());
             telemetry.addData("Claw Wrist Position: ", clawWrist.getPosition());
             telemetry.update();
-            if(g2.left_trigger>0.01||g2.right_trigger>0.01){
-                clawWrist.setPosition(clawWrist.getPosition()+g2.left_trigger-g2.right_trigger);
-            }
+           // if(g2.left_trigger>0.01||g2.right_trigger>0.01){
+              //  clawWrist.setPosition(clawWrist.getPosition()+g2.left_trigger-g2.right_trigger);
+            //}
             rightIntake.setPower(g1.right_trigger-g1.left_trigger);
             rightIntake.setDirection(CRServo.Direction.REVERSE);
             leftIntake.setPower(g1.right_trigger-g1.left_trigger);
