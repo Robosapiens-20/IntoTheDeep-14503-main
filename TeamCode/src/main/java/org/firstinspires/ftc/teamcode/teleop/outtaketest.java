@@ -100,8 +100,8 @@ public class outtaketest extends LinearOpMode {
 
                outtakeArmR.setPosition(0.3);
 
-                clawWrist.setPosition(0.6);
-                clawTurret.setPosition(0.52);
+                clawWrist.setPosition(0.57);
+                clawTurret.setPosition(0.25);
                 //claw.setPosition(0);
 
             }
@@ -116,13 +116,7 @@ public class outtaketest extends LinearOpMode {
                 clawWrist.setPosition(0.1);
                 clawTurret.setPosition(0);
             }
-            if(g2.left_bumper){
-                outtakeArmR.setPosition(0.4);
-                sleep(1000);
-                clawWrist.setPosition(0.2);
-                clawTurret.setPosition(0);
 
-            }
             if(g1.cross){
                 intakeDrop1.setPosition(Constants.intakeDropout);
                 intakeDrop2.setPosition(Constants.intakeDropout);
@@ -141,13 +135,20 @@ public class outtaketest extends LinearOpMode {
                 linkage2.setPosition(Constants.linkageOut);
 
             }
+            if(g2.left_bumper){
+                outtakeArmR.setPosition(0.45);
+                sleep(1000);
+                clawWrist.setPosition(0.1);
+                clawTurret.setPosition(0);
+
+            }
             if(g2.right_bumper){
                 claw.setPosition(clawpositionopen);
                 outtakeArmR.setPosition(0.76);
                 sleep(1000);
                 clawTurret.setPosition(0.25);
                 sleep(300);
-                clawWrist.setPosition(0.7172);
+                clawWrist.setPosition(0.1);
             }
             if(claw.getPosition() == clawpositionclosed){
                 clawOpened = false;
