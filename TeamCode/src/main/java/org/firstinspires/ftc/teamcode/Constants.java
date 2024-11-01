@@ -1,5 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.view.ActionProvider;
+
+import androidx.annotation.NonNull;
+
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -55,9 +61,9 @@ public class Constants{
     public static double secondSamplePickup = Math.toRadians(-87);
     public static double thirdSamplePickup = Math.toRadians(295);
     public static void slideMovement(int position, double speed) {
-        Constants.slidePosCurrent += position;
-        ls.setTargetPosition(Constants.slidePosCurrent);
-        rs.setTargetPosition(Constants.slidePosCurrent);
+        //Constants.slidePosCurrent += position;
+        ls.setTargetPosition(position);
+        rs.setTargetPosition(position);
         rs.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         ls.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         ls.setPower(speed);
@@ -91,6 +97,143 @@ public class Constants{
        // ls.setDirection(DcMotorSimple.Direction.REVERSE);
       //limelight = hardwareMap.get(Limelight3A.class, "limelight");
     }
+    public static class intakeMove implements Action{
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            intakeDrop1.setPosition(intakeDropout);
+            intakeDrop2.setPosition(intakeDropout);
+            linkage1.setPosition(linkageOut);
+            linkage2.setPosition(linkageOut);
+            leftIntake.setPower(1);
+            rightIntake.setPower(1);
+            try {
+                wait(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            leftIntake.setPower(0);
+            rightIntake.setPower(0);
+            return false;
+        }
+    }
+    public static class returnIntake implements Action{
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            linkage1.setPosition(linkageIn);
+            linkage2.setPosition(linkageIn);
+            intakeDrop1.setPosition(intakeDropin);
+            intakeDrop2.setPosition(intakeDropin);
+            return false;
+        }
+    }
+    public static class clip implements Action{
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            outtakeArmR.setPosition(0.3);
+            try {
+                wait(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            clawWrist.setPosition(0.45);
+            clawArm.setPosition(0.1);
+            return false;
+        }
+    }
+    public static class scoreClip implements Action{
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            slideMovement(Constants.slideTopClipPos,1);
+
+            slideMovement(Constants.slideTopClipPos-150,1);
+            return false;
+        }
+    }
+    public static class transfer implements Action{
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            claw.setPosition(clawOpenPosition);
+            try {
+                wait(300);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            clawArm.setPosition(0.65);
+            clawWrist.setPosition(0.67);
+            outtakeArmR.setPosition(0.15);
+            try {
+                wait(300);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            outtakeArmR.setPosition(0.08);
+            try {
+                wait(300);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            claw.setPosition(clawClosedPosition);
+            try {
+                wait(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            outtakeArmR.setPosition(0.3);
+            try {
+                wait(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            clawWrist.setPosition(0.45);
+            clawArm.setPosition(0.1);
+            return false;
+        }
+    }
+    public static Action transfer(){
+        return new transfer();
+    }
+    public static class deposit implements Action{
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            slideMovement(slideTopBasketPos,1);
+            try {
+                wait(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            clawWrist.setPosition(0.41);
+            claw.setPosition(clawOpenPosition);
+            clawWrist.setPosition(0.45);
+            try {
+                wait(300);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            clawArm.setPosition(0.65);
+            clawWrist.setPosition(0.67);
+            outtakeArmR.setPosition(0.15);
+            return false;
+        }
+    }
+    public static Action deposit(){
+        return new deposit();
+    }
+    public static Action firstScore(){
+        return new scoreClip();
+    }
+    public static Action clips(){
+        return new clip();
+    }
+    public static Action intakeIn(){
+        return new returnIntake();
+    }
+    public static Action intake(){
+        return new intakeMove();
+    }
+
 
 }
 
