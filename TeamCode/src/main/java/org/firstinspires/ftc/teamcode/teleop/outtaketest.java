@@ -88,7 +88,6 @@ public class outtaketest extends LinearOpMode {
             double backLeftPower = (y - x + rx) / denominator;
             double frontRightPower = (y - x - rx) / denominator;
             double backRightPower = (y + x - rx) / denominator;
-
             lf.setPower(frontLeftPower);
             lb.setPower(backLeftPower);
             rf.setPower(frontRightPower);
@@ -99,12 +98,8 @@ public class outtaketest extends LinearOpMode {
                 sleep(300);
                 clawTurret.setPosition(0.65);
                 clawWrist.setPosition(0.67);
-
                outtakeArmR.setPosition(0.15);
-
-
                 //claw.setPosition(0);
-
             }
             if(g2.circle) {
                 //arm towards extake
@@ -124,12 +119,8 @@ public class outtaketest extends LinearOpMode {
                 sleep(300);
                 clawTurret.setPosition(0.65);
                 clawWrist.setPosition(0.67);
-
                 outtakeArmR.setPosition(0.15);
-
             }
-
-
             if(g1.cross){
                 intakeDrop1.setPosition(Constants.intakeDropout);
                 intakeDrop2.setPosition(Constants.intakeDropout);
@@ -137,7 +128,6 @@ public class outtaketest extends LinearOpMode {
             if(g1.square){
                 intakeDrop1.setPosition(Constants.intakeDropin);
                 intakeDrop2.setPosition(Constants.intakeDropin);
-
             }
             if(g1.dpad_left){
                 linkage1.setPosition(Constants.linkageIn);
@@ -146,14 +136,12 @@ public class outtaketest extends LinearOpMode {
             if(g1.dpad_right){
                 linkage1.setPosition(Constants.linkageOut);
                 linkage2.setPosition(Constants.linkageOut);
-
             }
             if(g2.left_bumper){
                 outtakeArmR.setPosition(0.45);
                 sleep(1000);
                 clawWrist.setPosition(0.1);
                 clawTurret.setPosition(0);
-
             }
             if(g2.right_bumper){
                 claw.setPosition(clawpositionopen);
@@ -195,7 +183,12 @@ public class outtaketest extends LinearOpMode {
             if(g2.dpad_up){
                 slideMovement(Constants.slideTopBasketPos,1);
             }
-
+            if(g2.dpad_left){
+                slideMovement(Constants.slideTopClipPos,1);
+            }
+            if(g2.dpad_right){
+                slideMovement(Constants.slideBottomBasketPos,1);
+            }
 
         }
 

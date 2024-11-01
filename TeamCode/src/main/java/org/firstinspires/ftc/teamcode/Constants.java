@@ -55,7 +55,8 @@ public class Constants{
     public static double clawClosedPosition = 0.73;
     public static int slideTopBasketPos = 2116;
     public static CRServo rightIntake = null;
-
+    public static int slideTopClipPos = 1754;
+    public static int slideBottomBasketPos = 1024;
     public static CRServo leftIntake = null;
     public static int slidePosCurrent = 0;
     public static double intakeDropin = 0;
