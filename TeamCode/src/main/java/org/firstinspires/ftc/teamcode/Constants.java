@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -63,6 +64,14 @@ public class Constants{
     public static double intakeDropout = 0.93;
     public static double linkageIn = 0.15;
     public static double linkageOut = 0;
+    public static Pose2d startPosBucketBlue = new Pose2d(35, 70, Math.toRadians(-90));
+    public static Pose2d firstClip = new Pose2d(0, 40, Math.toRadians(90));
+    public static int clipPositon = 34;
+    public static Pose2d firstSamplePickup = new Pose2d(48,42,Math.toRadians(-90));
+    public static Pose2d toBucket = new Pose2d(56,56,Math.toRadians(-135));
+    public static double turnTowardsScoring = Math.toRadians(-135);
+    public static double secondSamplePickup = Math.toRadians(-87);
+    public static double thirdSamplePickup = Math.toRadians(295);
     public static void slideMovement(int position, double speed){
         Constants.slidePosCurrent+=position;
         ls.setTargetPosition(Constants.slidePosCurrent);
