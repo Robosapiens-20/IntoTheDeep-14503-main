@@ -47,7 +47,7 @@ public class TemplateRR1 extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, Constants.startPosBucketBlue);
         TrajectoryActionBuilder tab1 = drive.actionBuilder(Constants.startPosBucketBlue)
                 .setTangent(-10)
-                .splineToSplineHeading(Constants.firstClip, Math.PI / 2)
+                .splineToSplineHeading(Constants.firstClip, Math.PI / 2);
 
 
         TrajectoryActionBuilder tab2 = drive.actionBuilder(drive.pose)
