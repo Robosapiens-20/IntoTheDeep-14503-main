@@ -23,7 +23,7 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Constants;
 @Config
 @Autonomous(name = "BucketAutonBlue", group = "Autonomous")
-public class TemplateRR1 extends LinearOpMode {
+public class BlueBucketAuton extends LinearOpMode {
     public void slideMovement(int position, double speed) {
         ls.setTargetPosition(position);
         rs.setTargetPosition(position);
