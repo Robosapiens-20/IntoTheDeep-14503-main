@@ -54,18 +54,15 @@ public class Constants{
     public static double turnTowardsScoring = Math.toRadians(-135);
     public static double secondSamplePickup = Math.toRadians(-87);
     public static double thirdSamplePickup = Math.toRadians(295);
-    public static void slideMovement(int position, double speed){
-        Constants.slidePosCurrent+=position;
+    public static void slideMovement(int position, double speed) {
+        Constants.slidePosCurrent += position;
         ls.setTargetPosition(Constants.slidePosCurrent);
         rs.setTargetPosition(Constants.slidePosCurrent);
         rs.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         ls.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         ls.setPower(speed);
         rs.setPower(speed);
-
-
     }
-
     public static void initHardware(HardwareMap hardwareMap){
         lf = hardwareMap.dcMotor.get("lf");
         lb = hardwareMap.dcMotor.get("lb");

@@ -172,9 +172,6 @@ public class outtaketest extends LinearOpMode {
             telemetry.addData("Intake Drop Right Position", intakeDrop2.getPosition());
             telemetry.addData("Claw Wrist Position: ", clawWrist.getPosition());
             telemetry.update();
-           // if(g2.left_trigger>0.01||g2.right_trigger>0.01){
-              //  clawWrist.setPosition(clawWrist.getPosition()+g2.left_trigger-g2.right_trigger);
-            //}
             rightIntake.setPower(g1.right_trigger-g1.left_trigger);
             rightIntake.setDirection(CRServo.Direction.REVERSE);
             leftIntake.setPower(g1.right_trigger-g1.left_trigger);
@@ -189,9 +186,7 @@ public class outtaketest extends LinearOpMode {
             if(g2.dpad_right){
                 slideMovement(Constants.slideBottomBasketPos,1);
             }
-
         }
-
     }
     public void slideMovement(int position, double speed) {
         ls.setTargetPosition(position);
@@ -203,8 +198,5 @@ public class outtaketest extends LinearOpMode {
         while(ls.isBusy()&&rs.isBusy()&&opModeIsActive()){
             idle();
         }
-
     }
-
-
 }
