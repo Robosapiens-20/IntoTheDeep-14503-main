@@ -184,48 +184,52 @@ public class Constants{
             return false;
         }
     }
-    public static class transfer implements Action{
+    public static class transfer implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            claw.setPosition(clawOpenPosition);
-            try {
-                wait(300);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            switch (outtakeState) {
+                case outtakeRest:
+                    claw.setPosition(clawOpenPosition);
+                    outtakeState = Outtake.outtakeTransfer;
+
+                case outtakeTransfer:
+                    //moves arm towards the intake
+                    clawArm.setPosition(0.65);
+                    clawWrist.setPosition(0.67);
+                    outtakeArmR.setPosition(0.15);
+                    try {
+                        wait(300);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    //drops system onto the block
+                    outtakeArmR.setPosition(0.08);
+                    try {
+                        wait(300);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    //block gets gripped
+                    claw.setPosition(clawClosedPosition);
+                    try {
+                        wait(500);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    outtakeState = Outtake.outtakeDeposit;
+
+                case outtakeDeposit:
+                    //arm goes up to outtake position
+                    outtakeArmR.setPosition(0.3);
+                    try {
+                        wait(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    //wrist and turret turn
+                    clawWrist.setPosition(0.45);
+                    clawArm.setPosition(0.1);
             }
-            //moves arm towards the intake
-            clawArm.setPosition(0.65);
-            clawWrist.setPosition(0.67);
-            outtakeArmR.setPosition(0.15);
-            try {
-                wait(300);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            //drops system onto the block
-            outtakeArmR.setPosition(0.08);
-            try {
-                wait(300);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            //block gets gripped
-            claw.setPosition(clawClosedPosition);
-            try {
-                wait(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            //arm goes up to outtake position
-            outtakeArmR.setPosition(0.3);
-            try {
-                wait(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            //wrist and turret turn
-            clawWrist.setPosition(0.45);
-            clawArm.setPosition(0.1);
             return false;
         }
     }
