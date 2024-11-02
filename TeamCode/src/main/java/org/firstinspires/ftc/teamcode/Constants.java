@@ -116,7 +116,7 @@ public class Constants{
 
     }
     public static class intakeMove implements Action{
-
+        //intake goes out, drops down, and turns intake on for 1 second
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
             intakeDrop1.setPosition(intakeDropout);
@@ -136,6 +136,7 @@ public class Constants{
         }
     }
     public static class returnIntake implements Action{
+        //intake system goes back in
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
             linkage1.setPosition(linkageIn);
@@ -166,6 +167,11 @@ public class Constants{
             slideMovement(Constants.slideTopClipPos,1);
 
             slideMovement(Constants.slideTopClipPos-150,1);
+            claw.setPosition(clawOpenPosition);
+            clawArm.setPosition(0.65);
+            clawWrist.setPosition(0.67);
+            slideMovement(0,1);
+            outtakeArmR.setPosition(0.15);
             return false;
         }
     }
