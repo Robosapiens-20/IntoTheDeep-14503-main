@@ -124,7 +124,9 @@ public class outtaketest extends LinearOpMode {
                outtakeArmR.setPosition(0.15);
                 //claw.setPosition(0);
             }
-            if(g2.circle) {
+
+
+            /*if(g2.circle) {
                 //arm towards extake
                 outtakeArmR.setPosition(0.08);
                 sleep(1000);
@@ -143,7 +145,7 @@ public class outtaketest extends LinearOpMode {
                 clawTurret.setPosition(0.65);
                 clawWrist.setPosition(0.67);
                 outtakeArmR.setPosition(0.15);
-            }
+            }*/
 
             switch(outtakeState){
                 case outtakeRest:
@@ -153,7 +155,7 @@ public class outtaketest extends LinearOpMode {
                     }
                     break;
                 case outtakeTransfer:
-                    if(claw.getPosition() == clawpositionopen&&intakeState == Intake.intakeRest){
+                    if(claw.getPosition() == clawpositionopen && intakeState == Intake.intakeRest){
                         clawTurret.setPosition(0.65);
                         clawWrist.setPosition(0.67);
                         outtakeArmR.setPosition(0.15);
@@ -220,6 +222,8 @@ public class outtaketest extends LinearOpMode {
             }
 
 
+
+
             if(g1.cross){
                 intakeDrop1.setPosition(Constants.intakeDropout);
                 intakeDrop2.setPosition(Constants.intakeDropout);
@@ -236,7 +240,7 @@ public class outtaketest extends LinearOpMode {
                 linkage1.setPosition(Constants.linkageOut);
                 linkage2.setPosition(Constants.linkageOut);
             }
-            if(g2.left_bumper){
+            /*if(g2.left_bumper){
                 outtakeArmR.setPosition(0.45);
                 sleep(1000);
                 clawWrist.setPosition(0.1);
@@ -254,7 +258,7 @@ public class outtaketest extends LinearOpMode {
                 clawOpened = false;
             } else if(claw.getPosition() == clawpositionopen){
                 clawOpened = true;
-            }
+            }*/
 
 
             telemetry.addData("Lift left Encoder Value: ",ls.getCurrentPosition());
