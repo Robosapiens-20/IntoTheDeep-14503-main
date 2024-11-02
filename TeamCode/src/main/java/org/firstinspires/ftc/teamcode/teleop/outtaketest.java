@@ -196,7 +196,7 @@ public class outtaketest extends LinearOpMode {
                     }
                     break;
                 case outtakeDeposit:
-                    if(rs.getCurrentPosition() == Constants.slideTopBasketPos){
+                    if(rs.getCurrentPosition() >= Constants.slideTopBasketPos){
                         clawWrist.setPosition(0.41);
                         claw.setPosition(clawpositionopen);
                         clawWrist.setPosition(0.45);
