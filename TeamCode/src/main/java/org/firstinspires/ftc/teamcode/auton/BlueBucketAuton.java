@@ -60,19 +60,19 @@ public class BlueBucketAuton extends LinearOpMode {
                         Constants.intake(),
                         Constants.transfer(),
                         trajectory4,
-                        Constants.deposit(),
+                        Constants.transfer(),
                         trajectory5,
                         Constants.intake(),
                         Constants.intake(),
                         Constants.transfer(),
                         trajectory6,
-                        Constants.deposit(),
+                        Constants.transfer(),
                         trajectory7,
                         Constants.intake(),
                         Constants.intake(),
                         Constants.transfer(),
                         trajectory6,
-                        Constants.deposit()
+                        Constants.transfer()
                 )
         );
     }

@@ -184,7 +184,7 @@ public class Constants{
             return false;
         }
     }
-    public static class transfer implements Action {
+    public static class outtake implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
             switch (outtakeState) {
@@ -229,36 +229,43 @@ public class Constants{
                     //wrist and turret turn
                     clawWrist.setPosition(0.45);
                     clawArm.setPosition(0.1);
+                    slideMovement(slideTopBasketPos,1);
+                    try {
+                        wait(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    // wrist is set to flick block in
+                    clawWrist.setPosition(0.41);
+                    claw.setPosition(clawOpenPosition);
+                    clawWrist.setPosition(0.45);
+                    try {
+                        wait(300);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    //outtake system goes back towards intake
+                    clawArm.setPosition(0.65);
+                    clawWrist.setPosition(0.67);
+                    outtakeArmR.setPosition(0.15);
+                    slideMovement(0,1);
+                    outtakeState=Outtake.outtakeRest;
             }
             return false;
         }
     }
     public static Action transfer(){
-        return new transfer();
+        return new outtake();
     }
     public static class deposit implements Action{
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
             //slide goes up to the top basket position
-            slideMovement(slideTopBasketPos,1);
-            try {
-                wait(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            switch(outtakeState){
+                case outtakeDeposit:
+
             }
-            // wrist is set to flick block in
-            clawWrist.setPosition(0.41);
-            claw.setPosition(clawOpenPosition);
-            clawWrist.setPosition(0.45);
-            try {
-                wait(300);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            //outtake system goes back towards intake
-            clawArm.setPosition(0.65);
-            clawWrist.setPosition(0.67);
-            outtakeArmR.setPosition(0.15);
+
             return false;
         }
     }
