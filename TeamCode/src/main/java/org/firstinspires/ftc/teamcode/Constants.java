@@ -261,10 +261,26 @@ public class Constants{
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
             //slide goes up to the top basket position
-            switch(outtakeState){
-                case outtakeDeposit:
-
+            slideMovement(slideTopBasketPos,1);
+            try {
+                wait(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
+            // wrist is set to flick block in
+            clawWrist.setPosition(0.41);
+            claw.setPosition(clawOpenPosition);
+            clawWrist.setPosition(0.45);
+            try {
+                wait(300);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            //outtake system goes back towards intake
+            clawArm.setPosition(0.65);
+            clawWrist.setPosition(0.67);
+            outtakeArmR.setPosition(0.15);
+            slideMovement(0,1);
 
             return false;
         }
