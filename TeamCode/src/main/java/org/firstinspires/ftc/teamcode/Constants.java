@@ -63,14 +63,14 @@ public class Constants{
     public static double secondSamplePickup = Math.toRadians(-87);
     public static double thirdSamplePickup = Math.toRadians(295);
 
-    public static enum Intake{
+    public enum Intake{
         intakeRest,
         intakeOut
     }
 
     public static Intake intakeState = Intake.intakeRest;
 
-    public static enum Outtake{
+    public enum Outtake{
         outtakeRest,
         outtakeTransfer,
         outtakeOut,

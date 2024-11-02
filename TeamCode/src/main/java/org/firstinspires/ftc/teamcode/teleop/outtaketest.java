@@ -11,8 +11,30 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
+
+
 @TeleOp(name = "outtake test")
 public class outtaketest extends LinearOpMode {
+
+    public enum Outtake{
+        outtakeRest,
+        outtakeTransfer,
+        outtakeOut,
+        outtakeDeposit
+    }
+
+    Outtake outtakeState = Outtake.outtakeRest;
+
+
+    public enum Intake{
+        intakeRest,
+        intakeOut
+    }
+
+    Intake intakeState = Intake.intakeRest;
+
+
+
     DcMotor lf = null;
     DcMotor lb = null;
     DcMotor rb = null;
@@ -74,6 +96,7 @@ public class outtaketest extends LinearOpMode {
         linkage2.setPosition(Constants.linkageIn);
         boolean clawOpened = false;
 
+
         waitForStart();
         while(opModeIsActive()){
             double y = -g1.left_stick_y;
@@ -121,6 +144,82 @@ public class outtaketest extends LinearOpMode {
                 clawWrist.setPosition(0.67);
                 outtakeArmR.setPosition(0.15);
             }
+
+            switch(outtakeState){
+                case outtakeRest:
+                    if(g2.cross){
+                        claw.setPosition(clawpositionopen);
+                        outtakeState = Outtake.outtakeTransfer;
+                    }
+                    break;
+                case outtakeTransfer:
+                    if(claw.getPosition() == clawpositionopen){
+                        clawTurret.setPosition(0.65);
+                        clawWrist.setPosition(0.67);
+                        outtakeArmR.setPosition(0.15);
+                        try {
+                            wait(300);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        //drops system onto the block
+                        outtakeArmR.setPosition(0.08);
+                        try {
+                            wait(300);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        claw.setPosition(clawpositionclosed);
+                        try {
+                            wait(500);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        outtakeState = Outtake.outtakeOut;
+                    }
+                    break;
+                case outtakeOut:
+                    if(claw.getPosition() == clawpositionclosed){
+                        outtakeArmR.setPosition(0.3);
+                        try {
+                            wait(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        //wrist and turret turn
+                        clawWrist.setPosition(0.45);
+                        clawTurret.setPosition(0.1);
+                        slideMovement(Constants.slideTopBasketPos,1);
+                        outtakeState = Outtake.outtakeDeposit;
+                    }
+                    break;
+                case outtakeDeposit:
+                    if(rs.getCurrentPosition() == Constants.slideTopBasketPos){
+                        clawWrist.setPosition(0.41);
+                        claw.setPosition(clawpositionopen);
+                        clawWrist.setPosition(0.45);
+                        try {
+                            wait(300);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        //outtake system goes back towards intake
+                        clawTurret.setPosition(0.65);
+                        clawWrist.setPosition(0.67);
+                        outtakeArmR.setPosition(0.15);
+                        slideMovement(0,1);
+                        outtakeState = Outtake.outtakeRest;
+                    }
+                    break;
+                default:
+                    outtakeState = Outtake.outtakeRest;
+            }
+
+            if(g2.square){
+                outtakeState = Outtake.outtakeRest;
+            }
+
+
             if(g1.cross){
                 intakeDrop1.setPosition(Constants.intakeDropout);
                 intakeDrop2.setPosition(Constants.intakeDropout);
@@ -157,13 +256,7 @@ public class outtaketest extends LinearOpMode {
                 clawOpened = true;
             }
 
-            if(g2.cross && clawOpened){
-                claw.setPosition(clawpositionclosed);
-                sleep(200);
-            } else if(g2.cross && clawOpened==false){
-                claw.setPosition(clawpositionopen);
-                sleep(200);
-            }
+
             telemetry.addData("Lift left Encoder Value: ",ls.getCurrentPosition());
             telemetry.addData("Lift right Encoder Value: ", rs.getCurrentPosition());
             telemetry.addData("LinkageL Position: ", linkage1.getPosition());
