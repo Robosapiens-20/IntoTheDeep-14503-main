@@ -153,7 +153,7 @@ public class outtaketest extends LinearOpMode {
                     }
                     break;
                 case outtakeTransfer:
-                    if(claw.getPosition() == clawpositionopen){
+                    if(claw.getPosition() == clawpositionopen&&intakeState == Intake.intakeRest){
                         clawTurret.setPosition(0.65);
                         clawWrist.setPosition(0.67);
                         outtakeArmR.setPosition(0.15);
