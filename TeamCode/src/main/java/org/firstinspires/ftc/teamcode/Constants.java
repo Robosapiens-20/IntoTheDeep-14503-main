@@ -21,6 +21,8 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
+import org.firstinspires.ftc.robotcore.external.Const;
+
 public class Constants{
     public static DcMotor intake = null;
     public static DcMotor lf = null;
@@ -61,20 +63,20 @@ public class Constants{
     public static double secondSamplePickup = Math.toRadians(-87);
     public static double thirdSamplePickup = Math.toRadians(295);
 
-    public enum Intake{
+    public static enum Intake{
         intakeRest,
         intakeOut
     }
 
-    Intake intakeState = Intake.intakeRest;
+    public static Intake intakeState = Intake.intakeRest;
 
-    public enum Outtake{
+    public static enum Outtake{
         outtakeRest,
         outtakeTransfer,
         outtakeOut,
         outtakeDeposit
     }
-    Outtake outtakeState = Outtake.outtakeRest;
+    public static Outtake outtakeState = Outtake.outtakeRest;
 
 
     public static void slideMovement(int position, double speed) {
@@ -119,32 +121,35 @@ public class Constants{
         //intake goes out, drops down, and turns intake on for 1 second
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            intakeDrop1.setPosition(intakeDropout);
-            intakeDrop2.setPosition(intakeDropout);
-            linkage1.setPosition(linkageOut);
-            linkage2.setPosition(linkageOut);
-            leftIntake.setPower(1);
-            rightIntake.setPower(1);
-            try {
-                wait(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            switch (intakeState){
+                case intakeRest:
+                    intakeDrop1.setPosition(intakeDropout);
+                    intakeDrop2.setPosition(intakeDropout);
+                    linkage1.setPosition(linkageOut);
+                    linkage2.setPosition(linkageOut);
+                    leftIntake.setPower(1);
+                    rightIntake.setPower(1);
+                    try {
+                        wait(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    leftIntake.setPower(0);
+                    rightIntake.setPower(0);
+                    intakeState = Intake.intakeOut;
+                case intakeOut:
+                    //intake system goes back in
+                    linkage1.setPosition(linkageIn);
+                    linkage2.setPosition(linkageIn);
+                    intakeDrop1.setPosition(intakeDropin);
+                    intakeDrop2.setPosition(intakeDropin);
+                default:
             }
-            leftIntake.setPower(0);
-            rightIntake.setPower(0);
             return false;
         }
     }
-    public static class returnIntake implements Action{
-        //intake system goes back in
-        @Override
-        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            linkage1.setPosition(linkageIn);
-            linkage2.setPosition(linkageIn);
-            intakeDrop1.setPosition(intakeDropin);
-            intakeDrop2.setPosition(intakeDropin);
-            return false;
-        }
+    public static Action intake(){
+        return new intakeMove();
     }
     public static class clip implements Action{
         @Override
@@ -164,13 +169,17 @@ public class Constants{
 
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            //slides go to clip bar
             slideMovement(Constants.slideTopClipPos,1);
-
+            //slides go down after overshooting so clip goes down perfectly
             slideMovement(Constants.slideTopClipPos-150,1);
+            //claw opens and outtake goes back towards the intake
             claw.setPosition(clawOpenPosition);
             clawArm.setPosition(0.65);
             clawWrist.setPosition(0.67);
+            //slides go down
             slideMovement(0,1);
+            //outtakeArm goes back
             outtakeArmR.setPosition(0.15);
             return false;
         }
@@ -184,6 +193,7 @@ public class Constants{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            //moves arm towards the intake
             clawArm.setPosition(0.65);
             clawWrist.setPosition(0.67);
             outtakeArmR.setPosition(0.15);
@@ -192,24 +202,28 @@ public class Constants{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            //drops system onto the block
             outtakeArmR.setPosition(0.08);
             try {
                 wait(300);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            //block gets gripped
             claw.setPosition(clawClosedPosition);
             try {
-                wait(1000);
+                wait(500);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            //arm goes up to outtake position
             outtakeArmR.setPosition(0.3);
             try {
                 wait(1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            //wrist and turret turn
             clawWrist.setPosition(0.45);
             clawArm.setPosition(0.1);
             return false;
@@ -219,15 +233,16 @@ public class Constants{
         return new transfer();
     }
     public static class deposit implements Action{
-
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            //slide goes up to the top basket position
             slideMovement(slideTopBasketPos,1);
             try {
                 wait(1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            // wrist is set to flick block in
             clawWrist.setPosition(0.41);
             claw.setPosition(clawOpenPosition);
             clawWrist.setPosition(0.45);
@@ -236,6 +251,7 @@ public class Constants{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            //outtake system goes back towards intake
             clawArm.setPosition(0.65);
             clawWrist.setPosition(0.67);
             outtakeArmR.setPosition(0.15);
@@ -250,12 +266,6 @@ public class Constants{
     }
     public static Action clips(){
         return new clip();
-    }
-    public static Action intakeIn(){
-        return new returnIntake();
-    }
-    public static Action intake(){
-        return new intakeMove();
     }
 
 
