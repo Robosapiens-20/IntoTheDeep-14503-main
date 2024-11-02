@@ -1,46 +1,26 @@
 package org.firstinspires.ftc.teamcode.auton;
 
-import androidx.annotation.NonNull;
-
 // RR-specific imports
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
-import com.acmerobotics.roadrunner.Action;
-import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.SequentialAction;
+        import com.acmerobotics.roadrunner.Action;
+        import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
-import com.acmerobotics.roadrunner.Vector2d;
-import com.acmerobotics.roadrunner.ftc.Actions;
+        import com.acmerobotics.roadrunner.ftc.Actions;
 
 // Non-RR imports
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import org.firstinspires.ftc.teamcode.MecanumDrive;
+
+        import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Constants;
 @Config
 @Autonomous(name = "BucketAutonBlue", group = "Autonomous")
 public class BlueBucketAuton extends LinearOpMode {
-    public void slideMovement(int position, double speed) {
-        ls.setTargetPosition(position);
-        rs.setTargetPosition(position);
-        rs.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        ls.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        ls.setPower(speed);
-        rs.setPower(speed);
-        while(ls.isBusy()&&rs.isBusy()&&opModeIsActive()){
-            idle();
-        }
-    }
     public static DcMotor ls = null;
     public static DcMotor rs = null;
-
     @Override
     public void runOpMode() throws InterruptedException {
-
         Constants.initHardware(hardwareMap);
         ls =Constants.ls;
         rs=Constants.rs;
@@ -48,12 +28,8 @@ public class BlueBucketAuton extends LinearOpMode {
         TrajectoryActionBuilder tab1 = drive.actionBuilder(Constants.startPosBucketBlue)
                 .setTangent(-10)
                 .splineToSplineHeading(Constants.firstClip, Math.PI / 2);
-
-
         TrajectoryActionBuilder tab2 = drive.actionBuilder(drive.pose)
                 .lineToY(Constants.clipPositon);
-
-
         TrajectoryActionBuilder tab3 = drive.actionBuilder(drive.pose)
                 .setTangent(0)
                 .splineToSplineHeading(Constants.firstSamplePickup,0);
@@ -66,9 +42,6 @@ public class BlueBucketAuton extends LinearOpMode {
                 .turnTo(Constants.turnTowardsScoring);
         TrajectoryActionBuilder tab7 = drive.actionBuilder(drive.pose)
                 .turnTo(Constants.thirdSamplePickup);
-
-
-
         Action trajectory1= tab1.build();
         Action trajectory2 = tab2.build();
         Action trajectory3 = tab3.build();
@@ -76,7 +49,6 @@ public class BlueBucketAuton extends LinearOpMode {
         Action trajectory5 = tab5.build();
         Action trajectory6=tab6.build();
         Action trajectory7 = tab7.build();
-
         Actions.runBlocking(
                 new SequentialAction(
                         trajectory1,
@@ -101,12 +73,7 @@ public class BlueBucketAuton extends LinearOpMode {
                         Constants.transfer(),
                         trajectory6,
                         Constants.deposit()
-
                 )
         );
-
     }
-
-
-
 }
