@@ -60,6 +60,23 @@ public class Constants{
     public static double turnTowardsScoring = Math.toRadians(-135);
     public static double secondSamplePickup = Math.toRadians(-87);
     public static double thirdSamplePickup = Math.toRadians(295);
+
+    public enum Intake{
+        intakeRest,
+        intakeOut
+    }
+
+    Intake intakeState = Intake.intakeRest;
+
+    public enum Outtake{
+        outtakeRest,
+        outtakeTransfer,
+        outtakeOut,
+        outtakeDeposit
+    }
+    Outtake outtakeState = Outtake.outtakeRest;
+
+
     public static void slideMovement(int position, double speed) {
         //Constants.slidePosCurrent += position;
         ls.setTargetPosition(position);
@@ -96,6 +113,7 @@ public class Constants{
         outtakeArmR = hardwareMap.servo.get("outtakeArmR");
        // ls.setDirection(DcMotorSimple.Direction.REVERSE);
       //limelight = hardwareMap.get(Limelight3A.class, "limelight");
+
     }
     public static class intakeMove implements Action{
 
