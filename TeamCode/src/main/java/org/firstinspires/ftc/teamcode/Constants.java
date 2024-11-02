@@ -137,12 +137,14 @@ public class Constants{
                     leftIntake.setPower(0);
                     rightIntake.setPower(0);
                     intakeState = Intake.intakeOut;
+                    break;
                 case intakeOut:
                     //intake system goes back in
                     linkage1.setPosition(linkageIn);
                     linkage2.setPosition(linkageIn);
                     intakeDrop1.setPosition(intakeDropin);
                     intakeDrop2.setPosition(intakeDropin);
+                    break;
                 default:
             }
             return false;
@@ -191,7 +193,7 @@ public class Constants{
                 case outtakeRest:
                     claw.setPosition(clawOpenPosition);
                     outtakeState = Outtake.outtakeTransfer;
-
+                    break;
                 case outtakeTransfer:
                     //moves arm towards the intake
                     clawArm.setPosition(0.65);
@@ -217,6 +219,7 @@ public class Constants{
                         throw new RuntimeException(e);
                     }
                     outtakeState = Outtake.outtakeDeposit;
+                    break;
 
                 case outtakeDeposit:
                     //arm goes up to outtake position
@@ -250,6 +253,9 @@ public class Constants{
                     outtakeArmR.setPosition(0.15);
                     slideMovement(0,1);
                     outtakeState=Outtake.outtakeRest;
+                    break;
+                default:
+
             }
             return false;
         }
