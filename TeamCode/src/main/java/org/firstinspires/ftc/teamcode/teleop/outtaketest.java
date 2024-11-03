@@ -264,9 +264,6 @@ public class outtaketest extends LinearOpMode {
             telemetry.addData("Intake Drop Left Position", intakeDrop1.getPosition());
             telemetry.addData("Intake Drop Right Position", intakeDrop2.getPosition());
             telemetry.addData("Claw Wrist Position: ", clawWrist.getPosition());
-            telemetry.addData("Par encoder 1:", lb.getCurrentPosition());
-            telemetry.addData("Par encoder 2:", rf.getCurrentPosition());
-            telemetry.addData("Perp encoder: ", rb.getCurrentPosition());
 
             telemetry.update();
             rightIntake.setPower(g1.right_trigger-g1.left_trigger);
