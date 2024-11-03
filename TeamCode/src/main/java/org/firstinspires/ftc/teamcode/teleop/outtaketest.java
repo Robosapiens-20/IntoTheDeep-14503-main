@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.teamcode.Constants;
+
+
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -16,7 +18,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 @TeleOp(name = "outtake test")
 public class outtaketest extends LinearOpMode {
 
-    public enum Outtake{
+    /*public enum Outtake{
         outtakeRest,
         outtakeTransfer,
         outtakeOut,
@@ -31,7 +33,7 @@ public class outtaketest extends LinearOpMode {
         intakeOut
     }
 
-    Intake intakeState = Intake.intakeRest;
+    Intake intakeState = Intake.intakeRest;*/
 
 
 
@@ -76,8 +78,8 @@ public class outtaketest extends LinearOpMode {
         lf.setDirection(DcMotor.Direction.REVERSE);
         lb.setDirection(DcMotor.Direction.REVERSE);
 
-        //rightIntake = Constants.rightIntake;
-        //leftIntake = Constants.leftIntake;
+        rightIntake = Constants.rightIntake;
+        leftIntake = Constants.leftIntake;
         ls =Constants.ls;
         rs=Constants.rs;
         outtakeArmR = Constants.outtakeArmR;
@@ -126,7 +128,7 @@ public class outtaketest extends LinearOpMode {
             }
 
 
-            /*if(g2.circle) {
+            if(g2.circle) {
                 //arm towards extake
                 outtakeArmR.setPosition(0.08);
                 sleep(1000);
@@ -145,9 +147,8 @@ public class outtaketest extends LinearOpMode {
                 clawTurret.setPosition(0.65);
                 clawWrist.setPosition(0.67);
                 outtakeArmR.setPosition(0.15);
-            }*/
-
-            switch(outtakeState){
+            }
+            /*switch(outtakeState){
                 case outtakeRest:
                     if(g2.cross){
                         claw.setPosition(clawpositionopen);
@@ -216,14 +217,9 @@ public class outtaketest extends LinearOpMode {
                 default:
                     outtakeState = Outtake.outtakeRest;
             }
-
             if(g2.square){
                 outtakeState = Outtake.outtakeRest;
-            }
-
-
-
-
+            }*/
             if(g1.cross){
                 intakeDrop1.setPosition(Constants.intakeDropout);
                 intakeDrop2.setPosition(Constants.intakeDropout);
@@ -240,7 +236,7 @@ public class outtaketest extends LinearOpMode {
                 linkage1.setPosition(Constants.linkageOut);
                 linkage2.setPosition(Constants.linkageOut);
             }
-            /*if(g2.left_bumper){
+            if(g2.left_bumper){
                 outtakeArmR.setPosition(0.45);
                 sleep(1000);
                 clawWrist.setPosition(0.1);
@@ -258,7 +254,7 @@ public class outtaketest extends LinearOpMode {
                 clawOpened = false;
             } else if(claw.getPosition() == clawpositionopen){
                 clawOpened = true;
-            }*/
+            }
 
 
             telemetry.addData("Lift left Encoder Value: ",ls.getCurrentPosition());

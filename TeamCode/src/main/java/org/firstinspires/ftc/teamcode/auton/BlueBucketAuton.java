@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auton;
+/*package org.firstinspires.ftc.teamcode.auton;
 
 // RR-specific imports
 import com.acmerobotics.dashboard.config.Config;
@@ -77,3 +77,4 @@ public class BlueBucketAuton extends LinearOpMode {
         );
     }
 }
+*/

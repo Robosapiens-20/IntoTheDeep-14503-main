@@ -63,7 +63,7 @@ public class Constants{
     public static double secondSamplePickup = Math.toRadians(-87);
     public static double thirdSamplePickup = Math.toRadians(295);
 
-    public enum Intake{
+  /*  public enum Intake{
         intakeRest,
         intakeOut
     }
@@ -87,12 +87,16 @@ public class Constants{
         ls.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         ls.setPower(speed);
         rs.setPower(speed);
-    }
+    }*/
     public static void initHardware(HardwareMap hardwareMap){
         lf = hardwareMap.dcMotor.get("lf");
+        lf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         lb = hardwareMap.dcMotor.get("lb");
+        lb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rf = hardwareMap.dcMotor.get("rf");
+        rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rb = hardwareMap.dcMotor.get("rb");
+        rb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         ls = hardwareMap.dcMotor.get("ls");
         ls.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ls.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -117,7 +121,7 @@ public class Constants{
       //limelight = hardwareMap.get(Limelight3A.class, "limelight");
 
     }
-    public static class intakeMove implements Action{
+ /*   public static class intakeMove implements Action{
         //intake goes out, drops down, and turns intake on for 1 second
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
@@ -299,7 +303,7 @@ public class Constants{
     }
     public static Action clips(){
         return new clip();
-    }
+    }*/
 
 
 }
